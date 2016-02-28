@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ldml>
+	<identity>
+		<version number="" />
+		<generation date="2015-11-20T22:56:56" />
+		<language type="nnz" />
+	</identity>
+	<collations>
+		<collation>
+			<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+				<palaso:sortRulesType value="CustomICU" />
+			</special>
+		</collation>
+	</collations>
+	<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+		<palaso:abbreviation value="Tsw" />
+		<palaso:defaultFontFamily value="Charis SIL" />
+		<palaso:languageName value="Tswefap" />
+		<palaso:spellCheckingId value="nnz" />
+		<palaso:version value="2" />
+	</special>
+	<special xmlns:fw="urn://fieldworks.sil.org/ldmlExtensions/v1">
+		<fw:graphiteEnabled value="False" />
+		<fw:validChars value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt; &lt;ValidCharacters&gt;   &lt;WordForming&gt;'￼`￼´￼^￼¯￼ꜜ￼a￼A￼b￼B￼c￼C￼d￼D￼e￼E￼ə￼ɛ￼f￼F￼g￼G￼h￼H￼i￼I￼ɨ￼j￼J￼k￼K￼l￼L￼m￼M￼n￼N￼o￼O￼ɔ￼p￼P￼r￼R￼s￼S￼t￼T￼u￼U￼v￼V￼w￼W￼y￼Y￼z￼Z￼°&lt;/WordForming&gt;   &lt;Numeric /&gt;   &lt;Other&gt;U+0020&lt;/Other&gt; &lt;/ValidCharacters&gt;" />
+		<fw:windowsLCID value="1033" />
+	</special>
+</ldml>

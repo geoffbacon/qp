@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document version="2">
+  <interlinear-text guid="f00d8d07-7a9a-47e7-b1d1-a1529009a575">
+    <paragraphs>
+      <paragraph guid="09e0d2a1-cfbb-4b9a-9d5b-0bac6bd56e9e">
+        <phrases>
+          <phrase guid="005c60e7-2a92-473e-aafe-fe609b92593c">
+            <item type="segnum" lang="en">1</item>
+            <words>
+              <word guid="aa623f5b-ace2-49b7-8b99-01f901c32cf6">
+                <item type="txt" lang="en">tso</item>
+                <item type="gls" lang="en">spend the day (?)</item>
+              </word>
+              <word guid="88f320fa-0479-44cb-b80c-41a3a6bbadb6">
+                <item type="txt" lang="en">nku</item>
+                <item type="gls" lang="en">beans/rice</item>
+              </word>
+              <word guid="1be7e575-4fa4-4833-a039-2d2e70404d21">
+                <item type="txt" lang="en">akulu</item>
+                <item type="gls" lang="en">okra</item>
+              </word>
+              <word guid="602fba10-d09f-468f-b293-8ac1efb0375b">
+                <item type="txt" lang="en">aɲosi</item>
+                <item type="gls" lang="en">onion</item>
+              </word>
+            </words>
+            <item type="gls" lang="en">We spent the day feasting</item>
+          </phrase>
+        </phrases>
+      </paragraph>
+      <paragraph guid="ad483633-9fad-4afa-ab38-41c137269c0e" />
+    </paragraphs>
+    <languages>
+      <language lang="en" font="Times New Roman" vernacular="true" />
+    </languages>
+  </interlinear-text>
+</document>

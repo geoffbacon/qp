@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document xsi:noNamespaceSchemaLocation="file:FlexInterlinear.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <interlinear-text guid="f00d8d07-7a9a-47e7-b1d1-a1529009a575">
+    <paragraphs>
+      <paragraph>
+        <phrases>
+          <word><words>
+              <word><item type="txt" lang="en">tso</item><item type="gls" lang="en">spend the day (?)</item></word>
+              <word><item type="txt" lang="en">nku</item><item type="gls" lang="en">beans/rice</item></word>
+              <word><item type="txt" lang="en">akulu</item><item type="gls" lang="en">okra</item></word>
+              <word><item type="txt" lang="en">aɲosi</item><item type="gls" lang="en">onion</item></word>
+            </words><item type="segnum" lang="en">1</item><item type="gls" lang="en">We spent the day feasting</item></word>
+        </phrases>
+      </paragraph>
+      <paragraph />
+    </paragraphs>
+    <languages>
+      <language lang="en" font="Times New Roman" vernacular="true" />
+    </languages>
+  </interlinear-text>
+</document>

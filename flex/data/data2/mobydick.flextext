@@ -1,0 +1,1477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document version="2">
+  <interlinear-text guid="19385142-bf85-42f9-b657-489dd4f8b630">
+    <paragraphs>
+      <paragraph guid="95a91a36-4c97-48d4-a143-dea7d15f4cd7">
+        <phrases>
+          <phrase guid="435da13e-b230-49b7-9564-c3acd2b2cb3f">
+            <item type="segnum" lang="en">1</item>
+            <words>
+              <word guid="7c039455-846c-4f31-b360-5f0694089524">
+                <item type="txt" lang="fr">Call</item>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="34e51b05-66b5-466d-a5f3-2c4b59b89247">
+                <item type="txt" lang="fr">me</item>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="12f7bcc4-1297-454c-8d99-948a49f97063">
+                <item type="txt" lang="fr">Ishmael</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+        </phrases>
+      </paragraph>
+      <paragraph guid="85d38c08-5cb1-42c5-8218-94aa0d7c2253">
+        <phrases>
+          <phrase guid="08ace161-ab16-4f4b-ad1c-f6d17f6b2c46">
+            <item type="segnum" lang="en">2.1</item>
+            <words>
+              <word guid="5334534a-a03f-4c42-8cfb-aa801cf24c3f">
+                <item type="txt" lang="fr">Some</item>
+              </word>
+              <word guid="4839fbc5-aa8a-49b6-8f31-0727c19f48e3">
+                <item type="txt" lang="fr">years</item>
+              </word>
+              <word guid="07e26b0e-37ad-4d11-8c56-56170a7d00ae">
+                <item type="txt" lang="fr">ago-</item>
+              </word>
+              <word guid="553a220d-705d-4e6b-b1c1-ef745c8b6ce4">
+                <item type="txt" lang="fr">never</item>
+              </word>
+              <word guid="921308dc-7d37-4dcb-837f-66fd27727a84">
+                <item type="txt" lang="fr">mind</item>
+                <item type="pos" lang="en">adv</item>
+              </word>
+              <word guid="37a91995-8d78-4d7c-b72c-8ff53c8e2c52">
+                <item type="txt" lang="fr">how</item>
+              </word>
+              <word guid="b5d8ded1-a6fb-4faf-8d2b-2135030d2916">
+                <item type="txt" lang="fr">long</item>
+              </word>
+              <word guid="144d82f1-11e3-4aed-a1e6-9e0498c79da2">
+                <item type="txt" lang="fr">precisely-</item>
+              </word>
+              <word guid="3f3c2241-4fa3-4da3-90c7-398721b25fb0">
+                <item type="txt" lang="fr">having</item>
+              </word>
+              <word guid="20cd53ee-2ea4-4de3-b525-976b0777671e">
+                <item type="txt" lang="fr">little</item>
+              </word>
+              <word guid="2e08b355-f77a-4ca4-91bb-f0c26276157f">
+                <item type="txt" lang="fr">or</item>
+              </word>
+              <word guid="ee170f6b-d0a6-42f4-9383-22bd2918f12d">
+                <item type="txt" lang="fr">no</item>
+              </word>
+              <word guid="97c746a1-8f78-4c57-a5bb-def08af61c09">
+                <item type="txt" lang="fr">money</item>
+              </word>
+              <word guid="ba6a96c0-20d2-4e15-b12e-2184c6cb7647">
+                <item type="txt" lang="fr">in</item>
+              </word>
+              <word guid="ffb98d36-2972-4032-94d8-8d60b8ee3d6d">
+                <item type="txt" lang="fr">my</item>
+              </word>
+              <word guid="664046aa-067e-4952-b4e7-7d151786b104">
+                <item type="txt" lang="fr">purse</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="e37e819d-9df5-42dd-8d6a-10402967a82e">
+                <item type="txt" lang="fr">nothing</item>
+              </word>
+              <word guid="f19d2fc0-ba40-4355-a0bd-9f75b7afe71f">
+                <item type="txt" lang="fr">particular</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="b0fb93aa-1dfc-47f8-b4c2-894126dd179e">
+                <item type="txt" lang="fr">interest</item>
+              </word>
+              <word guid="dcc09499-a389-4d4a-a661-f56878c49286">
+                <item type="txt" lang="fr">me</item>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="8530ae7d-788b-4639-b4ba-be2428102827">
+                <item type="txt" lang="fr">on</item>
+              </word>
+              <word guid="17310a6b-807e-4219-9696-d5c92bd23a8d">
+                <item type="txt" lang="fr">shore</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="04e7d964-2f40-423c-9b50-5646d9312928">
+                <item type="txt" lang="fr">thought</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="24b9c24e-9100-4409-a29a-98b253ed0f4e">
+                <item type="txt" lang="fr">would</item>
+              </word>
+              <word guid="dd99a716-ae6f-4c24-b1f1-ca33e0c6448e">
+                <item type="txt" lang="fr">sail</item>
+              </word>
+              <word guid="be6a5dbd-11e5-4360-8f44-22bd3444ae44">
+                <item type="txt" lang="fr">about</item>
+              </word>
+              <word guid="81d5e6fa-11af-47f9-9a77-396935a7fdd6">
+                <item type="txt" lang="fr">a</item>
+              </word>
+              <word guid="20cd53ee-2ea4-4de3-b525-976b0777671e">
+                <item type="txt" lang="fr">little</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="005178f7-2872-4755-aad7-914c2b5a1142">
+                <item type="txt" lang="fr">see</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="f7331881-7fc8-4f2b-8528-bbdda4e5656c">
+                <item type="txt" lang="fr">watery</item>
+              </word>
+              <word guid="befa359e-f49f-4a89-b086-8c41ddb98108">
+                <item type="txt" lang="fr">part</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="0b242201-f49f-4489-bc7e-ab18082349e1">
+                <item type="txt" lang="fr">world</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="9c7a500e-99be-407f-a137-4cc7d6f48998">
+            <item type="segnum" lang="en">2.2</item>
+            <words>
+              <word guid="32f3c76f-bd3e-4837-8eda-c7696e4b3744">
+                <item type="txt" lang="fr">It</item>
+              </word>
+              <word guid="1ea4dfea-b540-45d0-81e4-727a3fd73f6f">
+                <item type="txt" lang="fr">is</item>
+              </word>
+              <word guid="81d5e6fa-11af-47f9-9a77-396935a7fdd6">
+                <item type="txt" lang="fr">a</item>
+              </word>
+              <word guid="ded7f3d8-e4d8-469c-a071-c24b7ee99853">
+                <item type="txt" lang="fr">way</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="bc70a55f-2d42-4e17-9522-0e4a10d0121b">
+                <item type="txt" lang="fr">have</item>
+                <item type="pos" lang="en">pro</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="c46060a8-afd2-4c23-b3df-36eac32c6b04">
+                <item type="txt" lang="fr">driving</item>
+              </word>
+              <word guid="cf01807a-89dd-4028-8cd0-e4893ca37327">
+                <item type="txt" lang="fr">off</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="0e68ad4b-f2c2-4f73-8b44-eb601d5aeff2">
+                <item type="txt" lang="fr">spleen</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="42cf1e74-6f36-4acb-86b9-e1ca0cafd45b">
+                <item type="txt" lang="fr">regulating</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="743362e2-4c70-4059-9dce-76c62514d293">
+                <item type="txt" lang="fr">circulation</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="812b5d6a-31c1-4577-aa22-80a20b57741d">
+            <item type="segnum" lang="en">2.3</item>
+            <words>
+              <word guid="02b1cf96-42f0-43b4-801c-60bf178137a5">
+                <item type="txt" lang="fr">Whenever</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="cca7c6ff-fc56-4a52-981a-846d258825c8">
+                <item type="txt" lang="fr">find</item>
+              </word>
+              <word guid="edf49ab4-78f5-44e6-b9bd-c8e4cd164637">
+                <item type="txt" lang="fr">myself</item>
+              </word>
+              <word guid="c10e143f-74bc-4704-a5df-4a727600b533">
+                <item type="txt" lang="fr">growing</item>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="4d70126d-470a-459c-85eb-5b0975d028db">
+                <item type="txt" lang="fr">grim</item>
+              </word>
+              <word guid="be6a5dbd-11e5-4360-8f44-22bd3444ae44">
+                <item type="txt" lang="fr">about</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="ccd69dca-2bb1-4685-b165-756217bed2b1">
+                <item type="txt" lang="fr">mouth</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">;</item>
+              </word>
+              <word guid="0bdf6649-eb9d-4972-a8bd-4d2ed9b0804e">
+                <item type="txt" lang="fr">whenever</item>
+              </word>
+              <word guid="9dcd601c-6c10-47da-a819-5de8fadcd514">
+                <item type="txt" lang="fr">it</item>
+              </word>
+              <word guid="1ea4dfea-b540-45d0-81e4-727a3fd73f6f">
+                <item type="txt" lang="fr">is</item>
+              </word>
+              <word guid="81d5e6fa-11af-47f9-9a77-396935a7fdd6">
+                <item type="txt" lang="fr">a</item>
+              </word>
+              <word guid="aa59f3cf-d10d-4199-8682-ff2d6c7f653d">
+                <item type="txt" lang="fr">damp</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="e00c2b5d-6ee0-4d70-b627-31310495c0b9">
+                <item type="txt" lang="fr">drizzly</item>
+              </word>
+              <word guid="e3178524-8374-465a-9122-50588014506c">
+                <item type="txt" lang="fr">November</item>
+              </word>
+              <word guid="ba6a96c0-20d2-4e15-b12e-2184c6cb7647">
+                <item type="txt" lang="fr">in</item>
+              </word>
+              <word guid="ffb98d36-2972-4032-94d8-8d60b8ee3d6d">
+                <item type="txt" lang="fr">my</item>
+              </word>
+              <word guid="b6991e95-859d-4426-9345-488babff6991">
+                <item type="txt" lang="fr">soul</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">;</item>
+              </word>
+              <word guid="0bdf6649-eb9d-4972-a8bd-4d2ed9b0804e">
+                <item type="txt" lang="fr">whenever</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="cca7c6ff-fc56-4a52-981a-846d258825c8">
+                <item type="txt" lang="fr">find</item>
+              </word>
+              <word guid="edf49ab4-78f5-44e6-b9bd-c8e4cd164637">
+                <item type="txt" lang="fr">myself</item>
+              </word>
+              <word guid="9677a622-7e13-4b1a-98f6-04fe7eca1975">
+                <item type="txt" lang="fr">involuntarily</item>
+              </word>
+              <word guid="98ae41c4-2560-4cf2-9ae5-760799ecc980">
+                <item type="txt" lang="fr">pausing</item>
+              </word>
+              <word guid="e13b1ea3-989a-405f-a088-d37cc8bab8e8">
+                <item type="txt" lang="fr">before</item>
+              </word>
+              <word guid="d929e8da-5bc4-4ca0-aaf9-81e8aa98592e">
+                <item type="txt" lang="fr">coffin</item>
+              </word>
+              <word guid="6713ccbb-ffc7-4ae8-a091-f044330d5a1e">
+                <item type="txt" lang="fr">warehouses</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="7ab3f770-ff7b-4128-9dbe-eb939890637c">
+                <item type="txt" lang="fr">bringing</item>
+              </word>
+              <word guid="2a4cc944-dc52-4068-a5a8-e1f65e3cc38a">
+                <item type="txt" lang="fr">up</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="4825fd8e-6ecf-4c0a-828f-39aa33d943eb">
+                <item type="txt" lang="fr">rear</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="539586b2-7112-4145-8339-516e593b4628">
+                <item type="txt" lang="fr">every</item>
+              </word>
+              <word guid="e6a64d52-9c94-4ab7-8f9d-2d8dc3da4e34">
+                <item type="txt" lang="fr">funeral</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="99411256-f3f4-4e32-a7ca-4ca0a010fd6e">
+                <item type="txt" lang="fr">meet</item>
+                <item type="pos" lang="en">existmrkr</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">;</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="2a6f86fd-25fe-4aae-8ee1-791fecce7af2">
+                <item type="txt" lang="fr">especially</item>
+              </word>
+              <word guid="0bdf6649-eb9d-4972-a8bd-4d2ed9b0804e">
+                <item type="txt" lang="fr">whenever</item>
+              </word>
+              <word guid="ffb98d36-2972-4032-94d8-8d60b8ee3d6d">
+                <item type="txt" lang="fr">my</item>
+              </word>
+              <word guid="4d0a63ba-3d64-480f-829a-e965faab4edd">
+                <item type="txt" lang="fr">hypos</item>
+              </word>
+              <word guid="89671463-baf0-4051-91fb-66edbe6a9cd8">
+                <item type="txt" lang="fr">get</item>
+              </word>
+              <word guid="72718550-93c1-4d0b-a316-034ec342a482">
+                <item type="txt" lang="fr">such</item>
+              </word>
+              <word guid="d06198fc-3127-4b24-a591-cac805ab2d8e">
+                <item type="txt" lang="fr">an</item>
+              </word>
+              <word guid="6072cf2a-f4c7-419f-8b51-427c9857617c">
+                <item type="txt" lang="fr">upper</item>
+              </word>
+              <word guid="8bbdd945-b7d2-43c0-9993-69c8f0c25758">
+                <item type="txt" lang="fr">hand</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="dcc09499-a389-4d4a-a661-f56878c49286">
+                <item type="txt" lang="fr">me</item>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="08aecc62-34cb-4eaf-831e-720fd7968a93">
+                <item type="txt" lang="fr">that</item>
+              </word>
+              <word guid="9dcd601c-6c10-47da-a819-5de8fadcd514">
+                <item type="txt" lang="fr">it</item>
+              </word>
+              <word guid="9747c59c-927d-4c2e-8f7d-db7f113a8ed4">
+                <item type="txt" lang="fr">requires</item>
+              </word>
+              <word guid="81d5e6fa-11af-47f9-9a77-396935a7fdd6">
+                <item type="txt" lang="fr">a</item>
+              </word>
+              <word guid="209a403d-b1b2-4687-9149-b9ccd5bc457d">
+                <item type="txt" lang="fr">strong</item>
+              </word>
+              <word guid="b427383c-442c-4650-9fd5-40a4c59f9251">
+                <item type="txt" lang="fr">moral</item>
+              </word>
+              <word guid="f767d2ad-9fe3-4936-bc67-80ef10cf41e1">
+                <item type="txt" lang="fr">principle</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="2cdac6a4-50c7-4745-8d47-2588f22b645b">
+                <item type="txt" lang="fr">prevent</item>
+              </word>
+              <word guid="dcc09499-a389-4d4a-a661-f56878c49286">
+                <item type="txt" lang="fr">me</item>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word guid="e4c182bb-5bc8-43d9-8dc9-ce5b0cbf8e3a">
+                <item type="txt" lang="fr">from</item>
+              </word>
+              <word guid="42b62556-0279-4875-b0d8-8754523eb3b1">
+                <item type="txt" lang="fr">deliberately</item>
+              </word>
+              <word guid="4d3c72d3-e371-4068-b19f-efe3fe2bf321">
+                <item type="txt" lang="fr">stepping</item>
+              </word>
+              <word guid="bc8b0aea-4692-43a4-9a46-4b3d08617475">
+                <item type="txt" lang="fr">into</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="7f2dc4b1-ac0b-41bc-917c-49f825d8ad05">
+                <item type="txt" lang="fr">street</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="654762ee-da33-4716-82db-1276103cc7dd">
+                <item type="txt" lang="fr">methodically</item>
+              </word>
+              <word guid="341ceada-524f-4424-ac97-278aacf1059d">
+                <item type="txt" lang="fr">knocking</item>
+              </word>
+              <word guid="371bb2e2-ff87-45c3-a412-174c049fd054">
+                <item type="txt" lang="fr">people's</item>
+              </word>
+              <word guid="ea308d37-b901-4ef5-8ee4-d8d868b37df8">
+                <item type="txt" lang="fr">hats</item>
+              </word>
+              <word guid="06c6e156-9df3-45b2-a7fd-8f5e9999d903">
+                <item type="txt" lang="fr">off-</item>
+              </word>
+              <word guid="4b90a331-056c-4544-87d3-32496e85574d">
+                <item type="txt" lang="fr">then</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="6921b8fd-75c0-4b05-b0e7-6d97c50a4147">
+                <item type="txt" lang="fr">account</item>
+              </word>
+              <word guid="9dcd601c-6c10-47da-a819-5de8fadcd514">
+                <item type="txt" lang="fr">it</item>
+              </word>
+              <word guid="998b237c-9c9c-4ec7-bca0-4cc24b87564f">
+                <item type="txt" lang="fr">high</item>
+              </word>
+              <word guid="239fad5b-d45d-48a0-b98b-815d9dc6cbe5">
+                <item type="txt" lang="fr">time</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="89671463-baf0-4051-91fb-66edbe6a9cd8">
+                <item type="txt" lang="fr">get</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="c1bb8619-0bbb-40e2-af39-8d1575edd48e">
+                <item type="txt" lang="fr">sea</item>
+              </word>
+              <word guid="892cbc06-799d-4d46-8aba-d294fcd8c84c">
+                <item type="txt" lang="fr">as</item>
+              </word>
+              <word guid="442bb211-0a03-4a9f-a5ab-5df3ef002f16">
+                <item type="txt" lang="fr">soon</item>
+              </word>
+              <word guid="892cbc06-799d-4d46-8aba-d294fcd8c84c">
+                <item type="txt" lang="fr">as</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="478255a9-9e0f-4571-bd59-24486f996d9b">
+                <item type="txt" lang="fr">can</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="c4807a7b-1828-4bf3-8bf1-64c92df178fb">
+            <item type="segnum" lang="en">2.4</item>
+            <words>
+              <word guid="d7f307b3-162d-4a9e-bca0-f8d624c171ac">
+                <item type="txt" lang="fr">This</item>
+              </word>
+              <word guid="1ea4dfea-b540-45d0-81e4-727a3fd73f6f">
+                <item type="txt" lang="fr">is</item>
+              </word>
+              <word guid="ffb98d36-2972-4032-94d8-8d60b8ee3d6d">
+                <item type="txt" lang="fr">my</item>
+              </word>
+              <word guid="e65cb238-a241-4837-ae1d-f0b476501b62">
+                <item type="txt" lang="fr">substitute</item>
+              </word>
+              <word guid="79f500f4-5b45-4d8b-b6d1-fe7bc5619a9c">
+                <item type="txt" lang="fr">for</item>
+              </word>
+              <word guid="0b40b388-e6b5-4b90-947c-7e976db56f7b">
+                <item type="txt" lang="fr">pistol</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="90b52210-01fd-4b7e-b613-b8611af74ff7">
+                <item type="txt" lang="fr">ball</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="f4d21def-10a2-4881-b48f-dbb9671d951d">
+            <item type="segnum" lang="en">2.5</item>
+            <words>
+              <word guid="5fa82f88-ce20-4351-95dd-86785d5e2ac3">
+                <item type="txt" lang="fr">With</item>
+              </word>
+              <word guid="81d5e6fa-11af-47f9-9a77-396935a7fdd6">
+                <item type="txt" lang="fr">a</item>
+              </word>
+              <word guid="60485142-980b-4dc8-84b3-d591bb9adc25">
+                <item type="txt" lang="fr">philosophical</item>
+              </word>
+              <word guid="cdef002c-6022-4b25-ad40-63666729f993">
+                <item type="txt" lang="fr">flourish</item>
+              </word>
+              <word guid="dd738bb0-3d46-4565-89cb-f802ed42995f">
+                <item type="txt" lang="fr">Cato</item>
+              </word>
+              <word guid="e2e59828-cd2e-4a77-a1f2-2c5693a11231">
+                <item type="txt" lang="fr">throws</item>
+              </word>
+              <word guid="a9065fdd-8ef5-4f8c-945e-37b332b79bfb">
+                <item type="txt" lang="fr">himself</item>
+              </word>
+              <word guid="ab51bd74-92cf-4088-a65c-49cbd7dcd6fa">
+                <item type="txt" lang="fr">upon</item>
+              </word>
+              <word guid="16cea316-4a81-4024-abd5-9f29c7fe99ef">
+                <item type="txt" lang="fr">his</item>
+              </word>
+              <word guid="962f31f2-67c9-42cd-8735-a44df64d5652">
+                <item type="txt" lang="fr">sword</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">;</item>
+              </word>
+              <word guid="8b71d744-6243-4365-b665-94e78f0d268a">
+                <item type="txt" lang="fr">I</item>
+              </word>
+              <word guid="05239d45-5817-4ef1-a703-92e3144eac91">
+                <item type="txt" lang="fr">quietly</item>
+              </word>
+              <word guid="11193cd7-1f27-40ba-8f75-8ab5d36d5d86">
+                <item type="txt" lang="fr">take</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="5eb1c605-fd98-499d-b8ef-6ec6693609a9">
+                <item type="txt" lang="fr">ship</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="4c0885f3-aa05-4aa1-aafa-af5cb17d3dd6">
+            <item type="segnum" lang="en">2.6</item>
+            <words>
+              <word guid="9606e32b-63af-47a2-af09-8099ecc1ce33">
+                <item type="txt" lang="fr">There</item>
+              </word>
+              <word guid="1ea4dfea-b540-45d0-81e4-727a3fd73f6f">
+                <item type="txt" lang="fr">is</item>
+              </word>
+              <word guid="e37e819d-9df5-42dd-8d6a-10402967a82e">
+                <item type="txt" lang="fr">nothing</item>
+              </word>
+              <word guid="22f0143d-605f-4011-9b29-de044202221c">
+                <item type="txt" lang="fr">surprising</item>
+              </word>
+              <word guid="ba6a96c0-20d2-4e15-b12e-2184c6cb7647">
+                <item type="txt" lang="fr">in</item>
+              </word>
+              <word guid="c570cead-b00e-494e-a82f-65cfbf134b89">
+                <item type="txt" lang="fr">this</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="165b55c1-d543-4a7d-ba25-ed2419dc1b90">
+            <item type="segnum" lang="en">2.7</item>
+            <words>
+              <word guid="9c1295e5-911c-4476-a2f1-64e21ca17c34">
+                <item type="txt" lang="fr">If</item>
+              </word>
+              <word guid="173f1d7e-6d31-4b12-a148-375c2d36658a">
+                <item type="txt" lang="fr">they</item>
+              </word>
+              <word guid="eead09c1-bff7-48eb-946e-07d16edff70b">
+                <item type="txt" lang="fr">but</item>
+              </word>
+              <word guid="44ccea65-a751-4783-9ef5-34080f1e0ae1">
+                <item type="txt" lang="fr">knew</item>
+              </word>
+              <word guid="9dcd601c-6c10-47da-a819-5de8fadcd514">
+                <item type="txt" lang="fr">it</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="c6669827-5f53-433f-8bb9-d57807b587a5">
+                <item type="txt" lang="fr">almost</item>
+              </word>
+              <word guid="c93482e5-6b41-45f0-85fc-a1053793971f">
+                <item type="txt" lang="fr">all</item>
+              </word>
+              <word guid="e2434bd5-fc0d-4f0f-902e-191f789bc712">
+                <item type="txt" lang="fr">men</item>
+              </word>
+              <word guid="ba6a96c0-20d2-4e15-b12e-2184c6cb7647">
+                <item type="txt" lang="fr">in</item>
+              </word>
+              <word guid="26f59696-6d1b-4a64-96ff-684a2dc41b25">
+                <item type="txt" lang="fr">their</item>
+              </word>
+              <word guid="49c2f9cb-c91b-4486-b762-c7fda25398d3">
+                <item type="txt" lang="fr">degree</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="9a8a5571-9d0e-4ee1-bb81-5a0d2777f643">
+                <item type="txt" lang="fr">some</item>
+              </word>
+              <word guid="239fad5b-d45d-48a0-b98b-815d9dc6cbe5">
+                <item type="txt" lang="fr">time</item>
+              </word>
+              <word guid="2e08b355-f77a-4ca4-91bb-f0c26276157f">
+                <item type="txt" lang="fr">or</item>
+              </word>
+              <word guid="f584917b-7665-4762-8fd2-599ee2768094">
+                <item type="txt" lang="fr">other</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="bbffd192-daba-446f-8b44-1b41948c0374">
+                <item type="txt" lang="fr">cherish</item>
+              </word>
+              <word guid="638bb870-057e-4459-bef5-92eca5d5bba7">
+                <item type="txt" lang="fr">very</item>
+              </word>
+              <word guid="53177c4b-f6dd-4174-8167-f4d0b0f51e5a">
+                <item type="txt" lang="fr">nearly</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="c44c2d44-4b13-4ff0-99bc-6668801a3d12">
+                <item type="txt" lang="fr">same</item>
+              </word>
+              <word guid="7cb7ce67-b1b5-4493-b807-83014256aa48">
+                <item type="txt" lang="fr">feelings</item>
+              </word>
+              <word guid="ba0adede-bab7-4c01-9990-8b2cf38f173b">
+                <item type="txt" lang="fr">towards</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="a87cac67-e5ca-4436-8bc0-1f91444fff15">
+                <item type="txt" lang="fr">ocean</item>
+              </word>
+              <word guid="fc2bbcc1-d349-4bf2-9578-2dffc0f42b76">
+                <item type="txt" lang="fr">with</item>
+              </word>
+              <word guid="dcc09499-a389-4d4a-a661-f56878c49286">
+                <item type="txt" lang="fr">me</item>
+                <item type="pos" lang="en">n</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+        </phrases>
+      </paragraph>
+      <paragraph guid="d7224bc2-0cbc-4f9b-b0a9-f66a2df704de" />
+      <paragraph guid="ed705beb-02a9-43d8-b2de-e53e10a72ba7">
+        <phrases>
+          <phrase guid="99c7477c-33ca-43e9-a202-3974c2134c39">
+            <item type="segnum" lang="en">4.1</item>
+            <words>
+              <word guid="9606e32b-63af-47a2-af09-8099ecc1ce33">
+                <item type="txt" lang="fr">There</item>
+              </word>
+              <word guid="9a94e536-8b11-4f7e-91ff-455118d0a073">
+                <item type="txt" lang="fr">now</item>
+              </word>
+              <word guid="1ea4dfea-b540-45d0-81e4-727a3fd73f6f">
+                <item type="txt" lang="fr">is</item>
+              </word>
+              <word guid="1823a922-318d-42f4-af0d-3ebbc8b7be46">
+                <item type="txt" lang="fr">your</item>
+              </word>
+              <word guid="af05fd08-ace4-4bb5-ad51-682cf25cb97f">
+                <item type="txt" lang="fr">insular</item>
+              </word>
+              <word guid="6ad29eca-ebd3-40dd-b9ac-af70baf2978d">
+                <item type="txt" lang="fr">city</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="271016da-00cf-41bd-8d35-ce52dc2f675b">
+                <item type="txt" lang="fr">Manhattoes</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="9641939f-c379-409f-b936-cdc95c54349a">
+                <item type="txt" lang="fr">belted</item>
+              </word>
+              <word guid="84b77812-0c4e-4236-a2b8-e030449fdd6c">
+                <item type="txt" lang="fr">round</item>
+              </word>
+              <word guid="46c8b88b-51d7-43c9-99bf-9eecce5a2e60">
+                <item type="txt" lang="fr">by</item>
+              </word>
+              <word guid="14c59971-a649-4589-a3e6-49542f066940">
+                <item type="txt" lang="fr">wharves</item>
+              </word>
+              <word guid="892cbc06-799d-4d46-8aba-d294fcd8c84c">
+                <item type="txt" lang="fr">as</item>
+              </word>
+              <word guid="5655b4cd-1d50-449b-95e9-d034b5b32aef">
+                <item type="txt" lang="fr">Indian</item>
+              </word>
+              <word guid="2c3863de-5e47-4dec-b3a8-38a0da90fe8b">
+                <item type="txt" lang="fr">isles</item>
+              </word>
+              <word guid="46c8b88b-51d7-43c9-99bf-9eecce5a2e60">
+                <item type="txt" lang="fr">by</item>
+              </word>
+              <word guid="41361507-6e2c-4567-8e0c-6a1ba558d025">
+                <item type="txt" lang="fr">coral</item>
+              </word>
+              <word guid="71ddfe41-23c2-4040-8f2e-2653c8f2faaf">
+                <item type="txt" lang="fr">reefs-</item>
+              </word>
+              <word guid="ef03aae3-8a5b-4239-83d3-7f69df74fbbf">
+                <item type="txt" lang="fr">commerce</item>
+              </word>
+              <word guid="37fe2fee-d903-42be-96e9-a8d6dacef3f1">
+                <item type="txt" lang="fr">surrounds</item>
+              </word>
+              <word guid="9dcd601c-6c10-47da-a819-5de8fadcd514">
+                <item type="txt" lang="fr">it</item>
+              </word>
+              <word guid="fc2bbcc1-d349-4bf2-9578-2dffc0f42b76">
+                <item type="txt" lang="fr">with</item>
+              </word>
+              <word guid="93585e97-7422-4e29-903b-0f046b350749">
+                <item type="txt" lang="fr">her</item>
+              </word>
+              <word guid="87599b3b-fb04-422f-bcd2-3ff64866fb39">
+                <item type="txt" lang="fr">surf</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="ddb937b9-d380-4bba-9c49-ce516d5b470d">
+            <item type="segnum" lang="en">4.2</item>
+            <words>
+              <word guid="4d56981e-73d4-44be-b051-6f6e707bbf33">
+                <item type="txt" lang="fr">Right</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="e5cc2de9-7bf3-4ca8-abd9-7d891cf35f32">
+                <item type="txt" lang="fr">left</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="29a0ede2-dff1-4a3a-aec0-659fc00205e3">
+                <item type="txt" lang="fr">streets</item>
+              </word>
+              <word guid="11193cd7-1f27-40ba-8f75-8ab5d36d5d86">
+                <item type="txt" lang="fr">take</item>
+              </word>
+              <word guid="0a27c255-a8f3-469b-801c-e6683dab4cf1">
+                <item type="txt" lang="fr">you</item>
+              </word>
+              <word guid="4700a5dc-bc4d-40c6-aaef-b2f5bdf727de">
+                <item type="txt" lang="fr">waterward</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="f99321d0-ca6c-4a1f-a831-4a05128cb10b">
+            <item type="segnum" lang="en">4.3</item>
+            <words>
+              <word guid="2324723c-5838-443a-ab83-3e847939d2ad">
+                <item type="txt" lang="fr">Its</item>
+              </word>
+              <word guid="cfb36790-98bc-4749-98fa-7f04a9716452">
+                <item type="txt" lang="fr">extreme</item>
+              </word>
+              <word guid="d97876e7-6427-4e25-8bf8-db18cb5e1cfa">
+                <item type="txt" lang="fr">downtown</item>
+              </word>
+              <word guid="1ea4dfea-b540-45d0-81e4-727a3fd73f6f">
+                <item type="txt" lang="fr">is</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="6e3afc9e-ee44-480c-87fc-e5504812d7ea">
+                <item type="txt" lang="fr">battery</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="4b2e290d-0ca5-4ab7-984a-f0ee257e430d">
+                <item type="txt" lang="fr">where</item>
+              </word>
+              <word guid="08aecc62-34cb-4eaf-831e-720fd7968a93">
+                <item type="txt" lang="fr">that</item>
+              </word>
+              <word guid="d9d6e01c-f720-493f-b234-456fa88201d7">
+                <item type="txt" lang="fr">noble</item>
+              </word>
+              <word guid="5c165b4f-425d-4734-b2c0-e51f557ece45">
+                <item type="txt" lang="fr">mole</item>
+              </word>
+              <word guid="1ea4dfea-b540-45d0-81e4-727a3fd73f6f">
+                <item type="txt" lang="fr">is</item>
+              </word>
+              <word guid="fd25c941-df8e-4a55-9641-9eb14c0574fe">
+                <item type="txt" lang="fr">washed</item>
+              </word>
+              <word guid="46c8b88b-51d7-43c9-99bf-9eecce5a2e60">
+                <item type="txt" lang="fr">by</item>
+              </word>
+              <word guid="91ce166d-a51a-42e0-8406-56df274f679d">
+                <item type="txt" lang="fr">waves</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="6db9e160-1acd-4a31-a76b-dee3346ebdc4">
+                <item type="txt" lang="fr">cooled</item>
+              </word>
+              <word guid="46c8b88b-51d7-43c9-99bf-9eecce5a2e60">
+                <item type="txt" lang="fr">by</item>
+              </word>
+              <word guid="23ca2bfc-ca6b-4d12-b23a-4ed91741b889">
+                <item type="txt" lang="fr">breezes</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="983e95e1-f7e3-4643-8321-e20ca8aa858d">
+                <item type="txt" lang="fr">which</item>
+              </word>
+              <word guid="81d5e6fa-11af-47f9-9a77-396935a7fdd6">
+                <item type="txt" lang="fr">a</item>
+              </word>
+              <word guid="f073546b-93db-42c2-a5a6-d7167ff7b7c2">
+                <item type="txt" lang="fr">few</item>
+              </word>
+              <word guid="f21c163d-0bba-4806-8a76-c136a40860cd">
+                <item type="txt" lang="fr">hours</item>
+              </word>
+              <word guid="45e0dd7c-86b5-468a-9b1b-78afaa6548bf">
+                <item type="txt" lang="fr">previous</item>
+              </word>
+              <word guid="43878335-450d-4a77-bd59-fe6abee74018">
+                <item type="txt" lang="fr">were</item>
+              </word>
+              <word guid="00b7ce98-05ca-4ab7-a452-fbab1c275104">
+                <item type="txt" lang="fr">out</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="5d6af9e4-12fb-47af-88e7-49d3f664d18e">
+                <item type="txt" lang="fr">sight</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="261ec55e-0995-4584-9756-69571f3a7241">
+                <item type="txt" lang="fr">land</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="da5a180b-d3cc-4bd7-9e2d-ccda6021d504">
+            <item type="segnum" lang="en">4.4</item>
+            <words>
+              <word guid="c92d5ac2-b459-4b4b-8ffb-20e89f81fb80">
+                <item type="txt" lang="fr">Look</item>
+              </word>
+              <word guid="6ddc82d0-b718-4447-b848-864af8fc71de">
+                <item type="txt" lang="fr">at</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="786bfa32-9950-4b41-beff-a7f8d1460c7e">
+                <item type="txt" lang="fr">crowds</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="56f324c7-14e0-49aa-813f-14124359adc0">
+                <item type="txt" lang="fr">water-gazers</item>
+              </word>
+              <word guid="bfecac16-7bf1-4de9-ad96-572b2f4ea04a">
+                <item type="txt" lang="fr">there</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+        </phrases>
+      </paragraph>
+      <paragraph guid="9667bb6a-a569-44f0-9c63-0ccf50a81d02" />
+      <paragraph guid="a2c28485-a589-4434-9359-f569219c464a">
+        <phrases>
+          <phrase guid="e76cc863-eec2-46c3-8fcc-e8da3222fb1f">
+            <item type="segnum" lang="en">6.1</item>
+            <words>
+              <word guid="765efbf5-974e-4292-9bc1-fd548fa6e919">
+                <item type="txt" lang="fr">Circumambulate</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="6ad29eca-ebd3-40dd-b9ac-af70baf2978d">
+                <item type="txt" lang="fr">city</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="81d5e6fa-11af-47f9-9a77-396935a7fdd6">
+                <item type="txt" lang="fr">a</item>
+              </word>
+              <word guid="fa483e3c-3f05-4cd3-982f-1377d7361d35">
+                <item type="txt" lang="fr">dreamy</item>
+              </word>
+              <word guid="c29e8141-d1ec-4366-8920-5a0af22689dc">
+                <item type="txt" lang="fr">Sabbath</item>
+              </word>
+              <word guid="a086de22-df5b-40be-9a19-75ab6b2628d8">
+                <item type="txt" lang="fr">afternoon</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="7639e5c8-de35-4773-b9a4-e49dc5c86eef">
+            <item type="segnum" lang="en">6.2</item>
+            <words>
+              <word guid="84f65736-c969-494f-95b1-705a8eb5b40d">
+                <item type="txt" lang="fr">Go</item>
+              </word>
+              <word guid="e4c182bb-5bc8-43d9-8dc9-ce5b0cbf8e3a">
+                <item type="txt" lang="fr">from</item>
+              </word>
+              <word guid="78f1a685-2945-4ef6-b6a4-d9dd846b43b7">
+                <item type="txt" lang="fr">Corlears</item>
+              </word>
+              <word guid="dc030457-3ae9-4b54-a44b-1af5a6761a6a">
+                <item type="txt" lang="fr">Hook</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="f9de03c4-a3d3-40c3-bee2-59e389fe1fbc">
+                <item type="txt" lang="fr">Coenties</item>
+              </word>
+              <word guid="2e7e370e-2a65-433b-953d-474cb9c49a33">
+                <item type="txt" lang="fr">Slip</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="e4c182bb-5bc8-43d9-8dc9-ce5b0cbf8e3a">
+                <item type="txt" lang="fr">from</item>
+              </word>
+              <word guid="d94ec00a-26d0-4e6f-99ea-855e31482edd">
+                <item type="txt" lang="fr">thence</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="46c8b88b-51d7-43c9-99bf-9eecce5a2e60">
+                <item type="txt" lang="fr">by</item>
+              </word>
+              <word guid="db436204-eb6d-4108-82e6-c62135abb10c">
+                <item type="txt" lang="fr">Whitehall</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="c99d8f84-9eca-45ed-a070-3bf6479b62b0">
+                <item type="txt" lang="fr">northward</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="c195b018-d309-4475-81de-57252781f9eb">
+            <item type="segnum" lang="en">6.3</item>
+            <words>
+              <word guid="2d2b3a94-0cbf-4c59-8edb-a637a4464204">
+                <item type="txt" lang="fr">What</item>
+              </word>
+              <word guid="fe8a672d-e2df-402a-82a3-cbb89c376388">
+                <item type="txt" lang="fr">do</item>
+              </word>
+              <word guid="0a27c255-a8f3-469b-801c-e6683dab4cf1">
+                <item type="txt" lang="fr">you</item>
+              </word>
+              <word guid="005178f7-2872-4755-aad7-914c2b5a1142">
+                <item type="txt" lang="fr">see</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">?</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="a0ef23cc-f49b-44b9-aeee-d6d80666f8cf">
+            <item type="segnum" lang="en">6.4</item>
+            <words>
+              <word guid="fd8ab7c8-8b3b-4bea-9106-536c59cafe62">
+                <item type="txt" lang="fr">-</item>
+              </word>
+              <word guid="6e321dc2-0bc8-43b1-af40-7e0d97d6a8db">
+                <item type="txt" lang="fr">Posted</item>
+              </word>
+              <word guid="f3727bf9-9d00-4ac3-932b-831b8e7a4779">
+                <item type="txt" lang="fr">like</item>
+              </word>
+              <word guid="826c2d68-ac12-49dc-b89e-760801b6a0f2">
+                <item type="txt" lang="fr">silent</item>
+              </word>
+              <word guid="72f8b83c-73d8-4a38-897d-08e24332cbcb">
+                <item type="txt" lang="fr">sentinels</item>
+              </word>
+              <word guid="c93482e5-6b41-45f0-85fc-a1053793971f">
+                <item type="txt" lang="fr">all</item>
+              </word>
+              <word guid="cbb71d89-630d-4348-b2a3-5542186b197d">
+                <item type="txt" lang="fr">around</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="38a9f133-bd9a-4496-8d25-81deb03b44e3">
+                <item type="txt" lang="fr">town</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="6c17bf70-f618-497d-9f38-285974450eac">
+                <item type="txt" lang="fr">stand</item>
+              </word>
+              <word guid="63841ba0-f1c8-4d5b-a4f3-25418f328518">
+                <item type="txt" lang="fr">thousands</item>
+              </word>
+              <word guid="ab51bd74-92cf-4088-a65c-49cbd7dcd6fa">
+                <item type="txt" lang="fr">upon</item>
+              </word>
+              <word guid="63841ba0-f1c8-4d5b-a4f3-25418f328518">
+                <item type="txt" lang="fr">thousands</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="3407abfd-a2d4-492f-9087-4f917130dc9e">
+                <item type="txt" lang="fr">mortal</item>
+              </word>
+              <word guid="e2434bd5-fc0d-4f0f-902e-191f789bc712">
+                <item type="txt" lang="fr">men</item>
+              </word>
+              <word guid="b0aaeff1-ba44-48a0-b635-e0de522c8aa0">
+                <item type="txt" lang="fr">fixed</item>
+              </word>
+              <word guid="ba6a96c0-20d2-4e15-b12e-2184c6cb7647">
+                <item type="txt" lang="fr">in</item>
+              </word>
+              <word guid="a87cac67-e5ca-4436-8bc0-1f91444fff15">
+                <item type="txt" lang="fr">ocean</item>
+              </word>
+              <word guid="bdfd2a77-a987-450f-ae39-30dcd2ee3df5">
+                <item type="txt" lang="fr">reveries</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="9659e178-8c5f-4c54-a0e4-6e377626e250">
+            <item type="segnum" lang="en">6.5</item>
+            <words>
+              <word guid="5334534a-a03f-4c42-8cfb-aa801cf24c3f">
+                <item type="txt" lang="fr">Some</item>
+              </word>
+              <word guid="da9d135e-a601-4a6c-8a4d-a1224fb80058">
+                <item type="txt" lang="fr">leaning</item>
+              </word>
+              <word guid="5af2d39d-7d58-4bff-875a-e3a5b5318a16">
+                <item type="txt" lang="fr">against</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="39a6c5d2-986c-47db-8bbc-839b2f4ac007">
+                <item type="txt" lang="fr">spiles</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">;</item>
+              </word>
+              <word guid="9a8a5571-9d0e-4ee1-bb81-5a0d2777f643">
+                <item type="txt" lang="fr">some</item>
+              </word>
+              <word guid="e898a631-5bb4-4f82-82e0-9332d42680d5">
+                <item type="txt" lang="fr">seated</item>
+              </word>
+              <word guid="ab51bd74-92cf-4088-a65c-49cbd7dcd6fa">
+                <item type="txt" lang="fr">upon</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="44b71637-bba4-4da3-8f4a-87e1604fa654">
+                <item type="txt" lang="fr">pier-heads</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">;</item>
+              </word>
+              <word guid="9a8a5571-9d0e-4ee1-bb81-5a0d2777f643">
+                <item type="txt" lang="fr">some</item>
+              </word>
+              <word guid="ab2bed45-e8ce-47e6-8887-3387f3308257">
+                <item type="txt" lang="fr">looking</item>
+              </word>
+              <word guid="54e685d6-b24e-482e-9789-c71e9ff0e01c">
+                <item type="txt" lang="fr">over</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="e65db3b3-5787-4a26-97e0-a45487066a66">
+                <item type="txt" lang="fr">bulwarks</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="554504a5-694b-4191-9c4c-e8a42a600ce6">
+                <item type="txt" lang="fr">ships</item>
+              </word>
+              <word guid="e4c182bb-5bc8-43d9-8dc9-ce5b0cbf8e3a">
+                <item type="txt" lang="fr">from</item>
+              </word>
+              <word guid="9cb2e3da-b6ca-4b87-9966-19a3580cb0fd">
+                <item type="txt" lang="fr">China</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">;</item>
+              </word>
+              <word guid="9a8a5571-9d0e-4ee1-bb81-5a0d2777f643">
+                <item type="txt" lang="fr">some</item>
+              </word>
+              <word guid="998b237c-9c9c-4ec7-bca0-4cc24b87564f">
+                <item type="txt" lang="fr">high</item>
+              </word>
+              <word guid="68591da6-c1e5-438d-94ff-832962a548fa">
+                <item type="txt" lang="fr">aloft</item>
+              </word>
+              <word guid="ba6a96c0-20d2-4e15-b12e-2184c6cb7647">
+                <item type="txt" lang="fr">in</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="3b722632-129a-47af-9f1e-391fa80e9b38">
+                <item type="txt" lang="fr">rigging</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="892cbc06-799d-4d46-8aba-d294fcd8c84c">
+                <item type="txt" lang="fr">as</item>
+              </word>
+              <word guid="c6c755bd-3d4f-4e92-9896-bee623578f4e">
+                <item type="txt" lang="fr">if</item>
+              </word>
+              <word guid="0878c69f-a3ed-484e-88dc-fea7dd110898">
+                <item type="txt" lang="fr">striving</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="89671463-baf0-4051-91fb-66edbe6a9cd8">
+                <item type="txt" lang="fr">get</item>
+              </word>
+              <word guid="81d5e6fa-11af-47f9-9a77-396935a7fdd6">
+                <item type="txt" lang="fr">a</item>
+              </word>
+              <word guid="da9dfda0-6e25-447e-8dbd-992ae549ac8f">
+                <item type="txt" lang="fr">still</item>
+              </word>
+              <word guid="e8ed4a04-f41b-4919-8bad-a06ce44a7a93">
+                <item type="txt" lang="fr">better</item>
+              </word>
+              <word guid="fae955cf-7306-4aa7-8416-9c5572fd3ad1">
+                <item type="txt" lang="fr">seaward</item>
+              </word>
+              <word guid="0a9de92b-0131-45a4-9b3a-907a8ac1cdf4">
+                <item type="txt" lang="fr">peep</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="cbc5d777-33ab-4896-bd92-23c35c246843">
+            <item type="segnum" lang="en">6.6</item>
+            <words>
+              <word guid="30ad82d6-f797-4123-92e9-2136c126ea37">
+                <item type="txt" lang="fr">But</item>
+              </word>
+              <word guid="ad96f4bf-5b26-4693-95c7-90451cf8a7d6">
+                <item type="txt" lang="fr">these</item>
+              </word>
+              <word guid="8a2ad3db-2e96-4d1e-ae10-23408c300497">
+                <item type="txt" lang="fr">are</item>
+              </word>
+              <word guid="c93482e5-6b41-45f0-85fc-a1053793971f">
+                <item type="txt" lang="fr">all</item>
+              </word>
+              <word guid="5c8033b0-d971-40f8-8fbf-75202153fa0a">
+                <item type="txt" lang="fr">landsmen</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">;</item>
+              </word>
+              <word guid="f3b8cf8c-7320-44e5-8f43-faf3838a8e86">
+                <item type="txt" lang="fr">of</item>
+              </word>
+              <word guid="440c46f8-769a-4c4a-8c9c-39fa5db39968">
+                <item type="txt" lang="fr">week</item>
+              </word>
+              <word guid="e215f7a8-0bed-4e2a-9eca-9249f494b0ba">
+                <item type="txt" lang="fr">days</item>
+              </word>
+              <word guid="0a21811c-3324-40ad-9353-b905c604b4c6">
+                <item type="txt" lang="fr">pent</item>
+              </word>
+              <word guid="2a4cc944-dc52-4068-a5a8-e1f65e3cc38a">
+                <item type="txt" lang="fr">up</item>
+              </word>
+              <word guid="ba6a96c0-20d2-4e15-b12e-2184c6cb7647">
+                <item type="txt" lang="fr">in</item>
+              </word>
+              <word guid="7149b7e6-6f88-46bc-9784-33d48cfa226e">
+                <item type="txt" lang="fr">lath</item>
+              </word>
+              <word guid="144deb69-a967-4f22-bdc2-4145fbfd7691">
+                <item type="txt" lang="fr">and</item>
+              </word>
+              <word guid="d074898b-f67b-4182-b3ae-1e93a269fc61">
+                <item type="txt" lang="fr">plaster-</item>
+              </word>
+              <word guid="dacffb9a-b4d4-4aa5-b05e-a6d86e98d407">
+                <item type="txt" lang="fr">tied</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="d29a5efe-804b-4575-ba1e-511bb0fda215">
+                <item type="txt" lang="fr">counters</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="08979974-0779-4f7d-b339-c4e6b1da6cdb">
+                <item type="txt" lang="fr">nailed</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="e21a6a6a-979c-49a6-8cfe-1dfc751330dc">
+                <item type="txt" lang="fr">benches</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">,</item>
+              </word>
+              <word guid="eeeeb38c-30f1-4cb1-809f-dc52de4d1322">
+                <item type="txt" lang="fr">clinched</item>
+              </word>
+              <word guid="3f64971d-4272-401f-b258-2b1e6e060229">
+                <item type="txt" lang="fr">to</item>
+              </word>
+              <word guid="89228d3f-3ef4-48b1-b14b-ec2805431e8c">
+                <item type="txt" lang="fr">desks</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">.</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="295a31a2-3cce-4a5d-9bc3-5edf72ea982f">
+            <item type="segnum" lang="en">6.7</item>
+            <words>
+              <word guid="8bba26d2-03bd-43f0-bde6-c2eacbe83718">
+                <item type="txt" lang="fr">How</item>
+              </word>
+              <word guid="4b90a331-056c-4544-87d3-32496e85574d">
+                <item type="txt" lang="fr">then</item>
+              </word>
+              <word guid="1ea4dfea-b540-45d0-81e4-727a3fd73f6f">
+                <item type="txt" lang="fr">is</item>
+              </word>
+              <word guid="c570cead-b00e-494e-a82f-65cfbf134b89">
+                <item type="txt" lang="fr">this</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">?</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="4cb83f05-a8d0-4fb1-a1de-a867a8dfbe33">
+            <item type="segnum" lang="en">6.8</item>
+            <words>
+              <word guid="7bee4162-4d6d-47fe-aab0-45e635191ceb">
+                <item type="txt" lang="fr">Are</item>
+              </word>
+              <word guid="f5ba0e87-bbbf-40ed-8b3d-879a8b0c28de">
+                <item type="txt" lang="fr">the</item>
+              </word>
+              <word guid="408f3ee6-abcb-4980-9e4e-018b19cd760d">
+                <item type="txt" lang="fr">green</item>
+              </word>
+              <word guid="0f280a73-d31e-473b-93e0-e9681a986c44">
+                <item type="txt" lang="fr">fields</item>
+              </word>
+              <word guid="bac6640a-c869-4971-8098-0a6429ee5e96">
+                <item type="txt" lang="fr">gone</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">?</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+          <phrase guid="d2a380e6-dc16-4f67-a1ea-e31c6eb0f4a8">
+            <item type="segnum" lang="en">6.9</item>
+            <words>
+              <word guid="2d2b3a94-0cbf-4c59-8edb-a637a4464204">
+                <item type="txt" lang="fr">What</item>
+              </word>
+              <word guid="fe8a672d-e2df-402a-82a3-cbb89c376388">
+                <item type="txt" lang="fr">do</item>
+              </word>
+              <word guid="173f1d7e-6d31-4b12-a148-375c2d36658a">
+                <item type="txt" lang="fr">they</item>
+              </word>
+              <word guid="818be52b-9096-4e48-86f0-3b5d6d16d3b4">
+                <item type="txt" lang="fr">here</item>
+              </word>
+              <word>
+                <item type="punct" lang="fr">?</item>
+              </word>
+            </words>
+            <item type="gls" lang="en"></item>
+          </phrase>
+        </phrases>
+      </paragraph>
+      <paragraph guid="6f3cda8c-dfa9-4075-b81c-a48576e3d132" />
+    </paragraphs>
+    <languages>
+      <language lang="en" font="Times New Roman" />
+      <language lang="fr" font="Times New Roman" vernacular="true" />
+    </languages>
+  </interlinear-text>
+</document>
