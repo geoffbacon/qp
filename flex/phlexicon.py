@@ -1,8 +1,6 @@
 ##  phlexicon.py
 ##
 ##  Author: Geoff Bacon <bacon@berkeley.edu>. 
-##
-##  For license information, see LICENSE.TXT
 
 """
 FLEx lexicon reader.
