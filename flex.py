@@ -24,7 +24,7 @@ class FLExlexicon(XMLCorpusReader):
             entry_fields = self.getFields(entry)
             entry_dict = {}
             for field in entry_fields:
-                value = getValue(entry, field)
+                value = self.getValue(entry, field)
                 entry_dict[field] = value
             self.lexicon[entry_guid] = entry_dict
             
