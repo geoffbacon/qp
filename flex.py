@@ -20,8 +20,8 @@ class FLExlexicon(XMLCorpusReader):
         
         self.lexicon = {}    
         for entry in self.entries:
-            entry_guid = getGuid(entry)
-            entry_fields = getFields(entry)
+            entry_guid = self.getGuid(entry)
+            entry_fields = self.getFields(entry)
             entry_dict = {}
             for field in entry_fields:
                 value = getValue(entry, field)
