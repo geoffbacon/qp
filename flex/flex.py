@@ -345,41 +345,10 @@ class Field_Defn(Multitext):
         if element:
             Multitext.__init__(self, element)
             self.tag = element.get('tag')
+            
 
-        
+# === FLExtext ===      
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-        
-
-      
-        
-        
-        
-        
-        
-# === FLExtext elements ===      
-        
 class Text(XMLCorpusReader):
     """Corpus reader for FLEx's flextext files.
 
