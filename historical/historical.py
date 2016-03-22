@@ -1,64 +1,14 @@
-##  Module historical.py
-##
-##  Author: Geoff Bacon <bacon@berkeley.edu>.
-
 """
 Module for historical linguistics tasks.
 
 This module provides functions for automatic sequence alignment,
 similarity analysis, cognate identification and regular sound correspondence
 identification supporting research in quantitative historical linguistics.
-
-Classes
--------
-
-A single class is defined: Wordlist.
-
-Working with wordlists
-----------------------
-
-================    ===============================
-Method              Description
-================    ===============================
-editDistance        Return edit distance of two str
-optimalAlignment    Wagner-Fischer algorithm
-================    =============================
-
-Example usage
--------------
-
-python3 historical.py
-
-Read in a CSV file:
-
->>> greek = Wordlist("data/greek-data.csv", header=True, glosses=True)
-
-Inspect the languages in the wordlist
-
->>> greek.languages
-['Earlier', 'Silli', ' Gloss']
-
-Retreive cognates by gloss
-
->>> greek.data['paper']
-['Oti', 'OCi']
-
-Align two words NB: Currently scoring function prefers gaps over aligning
-non-identical segments.
-
->>> word1, word2 = greek.data['paper']
->>> optimalAlignment(word1, word2)
-('i', 'i')
-('t', '-')
-('-', 'C')
-('O', 'O')
-
 """
-
 import csv
 import numpy as np
 
-# === Get data in ===
+# === Data handling ===
 
 class Wordlist:
     """ 
@@ -96,141 +46,106 @@ class Wordlist:
                 for row in reader:
                     self.data[i] = row
                     i += 1
-                    
-# === Preprocessing ===
-
-# Standardise orthography, combining characters, suprasegmentals, etc.
-# Already offered in NLTK? 
 
 # === Align ===
+
+    # === Constants ===
     
-def _editDistance(str1, str2):
-    """
-    Returns the distance matrix between two strings and the two strings' lengths.
-    
-    This was implemented directly from Greg Kondrak's thesis. 
-    """
-    
-    m = len(str1)
-    n = len(str2)
-    d = np.zeros((m + 1, n + 1), dtype=int)
-    
-    for i in range(1, m + 1):
-        d[i, 0] = d[i-1, 0] + 1
-    for j in range(1, n + 1):
-        d[0, j] = d[0, j-1] + 1
-        
-    for i in range(1, m+1):
-        for j in range(1, n+1):
-            if str1[i-1] == str2[j-1]:
-                d[i, j] = d[i-1, j-1]
-            else:
-                d[i, j] = min(
-                          d[i-1, j-1] + _cost(str1[i-1], str2[j-1]),
-                          d[i-1, j] + _cost(str1[i-1], "-"),
-                          d[i, j-1] + _cost("-", str2[j-1])
-                          )
-    return m, n, d
-    
-def editDistance(str1, str2):
-    """
-    Returns minimal edit distance between two strings.
-    
-    Wrapper function for _editDistance.
-    """
-    
-    m, n, d = _editDistance(str1, str2)
-    return d[m, n]
-    
-    
-def optimalAlignment(str1, str2):
-    """
-    Return the optimal alignment between two strings.
-    
-    This is the `plain-vanilla` Wagner-Fischer algorithm. This was implemented
-    directly from Greg Kondrak's thesis, although it is not yet ALINE. Kondrak
-    made a number of changes to WF, which are in TODOs below. 
-    
-    TODO: Retrieve best alignments, withing epsilon of optimal alignment. 
-    TODO: Use string similarity rather than string difference.
-    TODO: Local and semiglobal alignment.
-    TODO: Affine gap functions.
-    TODO: Add edit operations (compression, expansion).
-    TODO: Comparing phonetic segments (more sophisticated cost/similarity).
-    """
-    
-    m, n, d = _editDistance(str1, str2)
-    
-    i, j = m, n
-    while i != 0 or j != 0:
-        if d[i,j] == d[i-1, j] + _cost(str1[i-1], "-"):
-            print((str1[i-1], "-"))
-            i -= 1
-        elif d[i, j] == d[i, j-1] + _cost("-", str2[j-1]):
-            print(("-", str2[j-1]))
-            j -= 1
-        else:
-            print((str1[i-1], str2[j-1]))
-            i -= 1
-            j -= 1
+C_skip = 10
+C_sub = 35
+C_exp = 45
+C_vwl = 10
+consonants = ['b', 'c'] # etc
+R_c = ['syllabic', 'manner', 'voice', 'nasal', 'retroflex', 'lateral',
+       'aspirated', 'place']
+R_v = ['syllabic', 'nasal', 'retroflex', 'high', 'back', 'round', 'long']
+
+place =  {'bilabial': 1.0, 'labiodental': 0.95, 'dental': 0.9, 'alveolar': 0.85,
+          'retroflex': 0.8, 'palato-alveolar': 0.75, 'palatal': 0.7, 'velar': 0.6,
+          'uvular': 0.5, 'pharyngeal': 0.3, 'glottal': 0.1}
+
+manner = {'stop': 1.0, 'affricate': 0.9, 'fricative': 0.8, 'approximant': 0.6,
+          'high vowel': 0.4, 'mid vowel': 0.2, 'low vowel': 0.0}
+
+high =   {'high': 1.0, 'mid': 0.5, 'low': 0.0}
+
+back =   {'front': 1.0, 'central': 0.5, 'back': 0.0}
+
+other_features = {'plus': 1.0, 'minus': 0.0}
+
+salience = {'syllabic': 5, 'voice': 10, 'lateral': 10, 'high': 5, 'manner': 50,
+            'long': 1, 'place': 40, 'nasal': 10, 'aspirated': 5, 'back': 5,
+            'retroflex': 10, 'round': 5}
             
-def _cost(a, b):
-    """Return the cost of replacing character A with character B."""
-    if a == "-":
-        return 1
-    if b == "-":
-        return 1
-    else:
-        return 2
-        
-def _similarity(a, b):
-    """Return the similarity of character A with character B."""
-    if a == "-":
-        return 1
-    if b == "-":
-        return 1
-    else:
-        return 2
+            
+# TODO: feature_matrix = {}
 
-# This is work-in-progress.        
-def _local(str1, str2):
-    """
-    Compute local similarty between two strings.
-    """
-    
+    # === Algorithm ===
+ 
+def alignment(str1, str2, epsilon=0):
+    '''Compute the alignment of two phonetic strings.
+     
+    Implemented directly from Greg Kondrak's thesis, p. 51.'''
+     
     m = len(str1)
     n = len(str2)
-    s = np.zeros((m + 1, n + 1), dtype=int)
-    
+    S = np.zeros((m+1, n+1), dtype=int)
+     
     for i in range(1, m+1):
-        s[i, 0] = 0
+        S[i, 0] = 0
     for j in range(1, n+1):
-        s[0, j] = 0
-        
+        S[0, j] = 0
+         
     for i in range(1, m+1):
         for j in range(1, n+1):
-            s[i, j] = max(
-                          s[i-1, j-1] + _similarity(str1[i-1], str2[j-1]),
-                          s[i-1, j] + _similarity(str1[i-1], "-"),
-                          s[i, j-1] + _similarity("-", str2[j-1]),
+            S[i, j] = max(
+                          S[i-1, j] + sigma_skip(str1[i]),
+                          S[i, j-1] + sigma_skip(str2[j]),
+                          S[i-1, j-1] + sigma_sub(str1[i], str2[j]),
+                          S[i-1, j-2] + sigma_exp(str1[i], str2[j-1:j]),
+                          S[i-2, j-1] + sigma_exp(str1[i-1:i], str2[j]),
                           0
-                          )
-    return m, n, s
-        
+                         )
+    T = (1-epsilon)*S.amax()
+    
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if S[i,j] >= T:
+                retrieve(i, j, 0)
+                           
+def sigma_skip(p):
+    return C_skip
 
+def sigma_sub(p, q):
+    return C_sub - delta(p, q) - V(p) - V(q)
+    
+def sigma_exp(p, q):
+    return C_exp - delta(p, q[0]) - delta(p, q[1]) - V(p) - max(V(q[0]), V(q[1]))
+    
+def delta(p, q):
+    features = R(p, q)
+    total = 0
+    for f in features:
+        total += diff(p, q, f) * salience[f]
+    return total
+    
+def diff(p, q, f):
+    p_features, q_features = feature_matrix[p], feature_matrix[q]
+    return p_features[f] - q_features[f]
         
+def R(p, q):
+    if p in consonants or q in consonants:
+        return R_c
+    return R_v
 
+def V(p):
+    if p in consonants:
+        return 0
+    return C_vwl
+    
+def retrieve(i, j, s):
+    pass
+  
 # === Identify cognates ===  
      
-    
 # === Identify sound correspondences ===      
-
-
-
-
-                
-            
-            
-                
-            
-                
