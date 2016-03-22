@@ -1,355 +1,193 @@
 """
-Module for reading, writing and manipulating FLEx lexicons.
+Module for reading, writing and manipulating FLEx lexicons and texts.
 
-FLEx works with SIL's Lexicon Interchange FormaT (LIFT), a file format for 
-dictionaries. This script models a LIFT file. Specifically, it models version 
-0.13 of the LIFT standard, as described in the relevant document at 
-http://lift-standard.googlecode.com/svn/trunk/. Pages 16-7 provide the UML 
-diagrams from which the LIFT standard was modelled.
+FLEx stores lexicons and texts in XML formats, lexicons as SIL's Lexicon 
+Interchange FormaT (LIFT), and texts as flextext. This script provides classes 
+for both file formats derived from a common FLEx class. All the data in a file 
+of either format is stored as a dictionary in the _data attribute.
 
-This script is divided into three sections, correpsonding to the three sections 
-in the UML diagrams mentioned above: `Base elements`, `Entry elements`, and 
-`Header elements`.
+Classes
+-------
 
-TODO: Provide access to data with public methods
-TODO: Fix `if element` plague. The classes I define all expect an XML node during 
-construction. If that node is not there in the LIFT file, error is raised during 
-__init__. If __init__ begins with `if element`, then asking for the attributes of 
-an element-less object raises error. 
-TODO: Fix Span/Text classes. For some reason, they don't work.
+================    =================================
+Class               Description
+================    =================================
+_FLEx               Holds data from XML file as dict.
+Lexicon             Models a lexicon document.
+Entry               Models an entry in a lexicon.
+Text                Models a text document.
+
+Working with lexicons and entries 
+---------------------------------
+
+================    ===============================
+Method              Description
+================    ===============================
+headword            Return headword of an entry.
+gloss               Return gloss of an entry.
+pos                 Return POS of entry.
+citation            Return citation form of entry.
+================    ===============================
+
+Working with texts 
+------------------
+
+================    ===============================
+Method              Description
+================    ===============================
+paras
+sents
+words
+raw
+================    ===============================
 
 Example usage
 -------------
 
 Read in a LIFT file:
 
->>> tsw = Lift("data", "tswefap.lift")
+>>> tsw = Lexicon('data', 'tswefap.lift')
 
 Get the 57th entry in the lexicon:
 
->>> tsw.entries[56]
+>>> my_entry = tsw._data['entry'][56]
+
+Get the headword of that entry:
+
+>>> my_entry.headword()
+
+Read in a flextext file:
+
+>>> mb = Text('data', 'mobydick.flextext')
+
+TODO: More public methods, but without recreating dictionary syntax.
+TODO: Error handling if tag not found (e.g. currently if an entry has no 
+`citation` field, the citation() method will break).
+
 """
-
-from datetime import datetime
-
+import re
 from nltk.corpus.reader.xmldocs import XMLCorpusReader
 
-# === LIFT ===
-
-    # === Base elements ===
-
-# class Span:
-#     """Models span class of LIFT."""
-#     def __init__(self, element):
-#         if element:
-#             self.lang = element.get('lang')
-#             self.href = element.get('href')
-#             self.span_class = element.get('class')
-#             self.span = [Span(i) for i in element.findall('span')]
-#             
-# class Text:
-#     """Models text class of LIFT."""
-#     def __init__(self, element):
-#         if element:
-#             self.span = [Span(i) for i in element.findall('span')]
-
-class Form:
-    """Models form class of LIFT."""
-    def __init__(self, element):
-        if element:
-            self.lang = element.get('lang')
-            self.text = element.find('text').text
-            self.annotation = [Annotation(i) for i in element.findall('annotation')]
-            
-class Multitext:
-    """Models multitext class of LIFT."""
-    def __init__(self, element):
-        if element:
-            self.form = [Form(i) for i in element.findall('form')]
-            
-class Example(Multitext):
-    """Models example class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.source = element.get('source')
-            self.translation = [Translation(i) for i in element.findall('translation')]
-        
-class Translation(Multitext):
-    """Models translation class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.type = element.get('type')
-            
-class Field(Multitext):
-    """Models field class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.type = element.get('type')
-            self.dateModified = element.get('dateModified')
-            self.dateCreated = element.get('dateCreated')
-            self.trait = [i for i in element.findall('trait')]
-            self.annotation = [i for i in element.findall('annotation')]
-            
-class Trait:
-    """Models field class of LIFT."""
-    def __init__(self, element):
-        if element:
-            self.name = element.get('name')
-            self.value = element.get('value')
-            self.annotation = [Annotation(i) for i in element.findall('annotation')]
-
-class Note(Multitext):
-    """Models note class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.type = element.get('type')
-
-class Variant(Multitext):
-    """Models variant class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.ref = element.get('ref')
-            self.pronunciation = [Phonetic(i) for i in element.findall('pronunciation')]
-            self.relation = [Relation(i) for i in element.findall('relation')]
-        
-class Reversal(Multitext):
-    """Models reversal class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.type = element.get('type')
-            self.main = Reversal(element.find('main'))
-            self.grammatical_info = Grammatical_Info(element.find('grammatical-info'))
-    
-class Phonetic(Multitext):
-    """Models phonetic class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.media = [URLRef(i) for i in element.findall('media')]
-            
-class URLRef:
-    """Models phonetic class of LIFT."""
-    def __init__(self, element):
-        if element:
-            self.href = element.get('href')
-            self.label = Multitext(element.find('label'))
-
-class Annotation(Multitext):
-    """Models annotation class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.name = element.get('name')
-            self.value = element.get('value')
-            self.who = element.get('who')
-            self.when = element.get('when')
-
-    # === Entry elements ===
-
-class Extensible:
-    """Models extensible class of LIFT."""
-    def __init__(self, element):
-        if element:
-            self.dateCreated = element.get('dateCreated')
-            self.dateModified = element.get('dateModified')
-            self.field = [Field(i) for i in element.findall('field')]
-            self.trait = [Trait(i) for i in element.findall('trait')]
-            self.annotation = [Annotation(i) for i in element.findall('annotation')]
-
-class Etymology(Extensible):
-    """Models etymology class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Extensible.__init__(self, element)
-            self.type = element.get('type')
-            self.source = element.get('source')
-            self.gloss = [Form(i) for i in element.findall('gloss')]
-            self.form = Form(element.find('form'))
-        
-class Sense(Extensible):
-    """Models sense class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Extensible.__init__(self, element)
-            self.id = element.get('id')
-            self.order = element.get('order')
-            self.grammatical_info = Grammatical_Info(element.find('grammatical-info'))
-            self.gloss = [Form(i) for i in element.findall('gloss')]
-            self.definition = Multitext(element.find('definition'))
-            self.relation = [Relation(i) for i in element.findall('relation')]
-            self.note = [Note(i) for i in element.findall('note')]
-            self.example = [Example(i) for i in element.findall('example')]
-            self.reversal = [Reversal(i) for i in element.findall('reversal')]
-            self.illustration = [URLRef(i) for i in element.findall('illustration')]
-            self.subsense = [Sense(i) for i in element.findall('subsense')]
-        
-class Note(Extensible):
-    """Models note class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Extensible.__init__(self, element)
-            self.type = element.get('type')
-    
-class Variant(Extensible):
-    """Models variant class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Extensible.__init__(self, element)
-            self.ref = element.get('ref')
-            self.pronunciation = [Phonetic(i) for i in element.findall('pronunciation')]
-            self.relation = [Relation(i) for i in element.findall('relation')]
-             
-class Relation(Extensible):
-    """Models relation class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Extensible.__init__(self, element)
-            self.type = element.get('type')
-            self.ref = element.get('ref')
-            self.order = element.get('order')
-            self.usage = Multitext(element.find('usage'))
-
-class Example(Extensible):
-    """Models example class of LIFT."""
-    def __init__(self, element):
-        if element:
-            Extensible.__init__(self, element)
-            self.source = element.get('source')
-            self.translation = [Translation(i) for i in element.findall('translation')]
-    
-class Grammatical_Info:
-    """Models grammatical-info class of LIFT."""
-    def __init__(self, element):
-        if element:
-            self.value = element.get('value')
-            self.trait = [Trait(i) for i in element.findall('trait')]
-
-class Entry(Extensible):
-    """
-    Models entry class of LIFT. 
-    
-    During construction, get() will return None if the attribute isn't found.
-    """
-    def __init__(self, entry):
-        Extensible.__init__(self, entry)
-        self._entry = entry
-        self.id = entry.get('id')
-        self.order = entry.get('order')
-        self.guid = entry.get('guid')
-        self.dateDeleted = entry.get('dateDeleted')
-        self.lexical_unit = Multitext(entry.find('lexical-unit'))
-        self.citation = Multitext(entry.find('citation'))
-        self.pronunciation = [Phonetic(i) for i in entry.findall('pronunciation')]
-        self.variant = [Variant(i) for i in entry.findall('variant')]
-        self.sense = [Sense(i) for i in entry.findall('sense')]
-        self.note = [Note(i) for i in entry.findall('note')]
-        self.relation = [Relation(i) for i in entry.findall('relation')]
-        self.etymology = Etymology(entry.find('etymology'))
-        
-    def _set_date_modified(self):
-        date = datetime.utcnow().isoformat().split(".")[0] + "Z"
-        self._entry.set('dateModified', date)
-        self.dateModified = self._entry.get('dateModified') 
-    
-    def headword(self):
-        """Returns headword of entry."""
-        forms = self.lexical_unit.form
-        if len(forms) == 0:
-            return None
-        elif len(forms) == 1:
-            return forms[0].text
-        else:
-            return [form.text for form in forms]
-            
-    def pos(self):
-        """Returns POS of entry."""
-        senses = self.sense
-        if len(senses) == 0:
-            return None
-        elif len(senses) == 1:
-            return senses[0].grammatical_info.value
-        else:
-            return [sense.grammatical_info.value for sense in sense]
-        
-    # === Header elements ===
-
-class Lift(XMLCorpusReader):
-    """Models LIFT object."""
+class _FLEx(XMLCorpusReader):
     def __init__(self, root, fileid):
         XMLCorpusReader.__init__(self, root, fileid)
         self._fileid = self._fileids[0]
-        elt = self.xml()
-        self.version = float(elt.get('version'))
-        self.producer = elt.get('producer')
-        self.header = Header(elt.find('header'))
-        self.entries = [Entry(i) for i in elt.findall('entry')] 
+        self.elt = self.xml()
+        self._data = self._load_data(self.elt)
+          
+    def _has_content(self, str):
+        """Return True if String has any non-whitespace characters.
         
-    def summary(self):
-        print("Basic facts about", self._fileid)
-        len_of_asterisks = 18 + len(self._fileid)
-        print("*"*len_of_asterisks)
-        num_of_entries = len(self.entries)
-        print("Number of entries:", num_of_entries, "\n")
-    
-class Header:
-    """Models header in LIFT."""
-    def __init__(self, element):
-        self.description = Multitext(element.find('description'))
-        self.ranges = Ranges(element.find('ranges'))
-        self.fields = Field_Defns(element.find('fields'))
+        ElementTree sometimes returns new-line, whitespace, etc. as the text 
+        contents of an element. If there is no non-whitespace characters, we 
+        should treat that element as not having text content. This methods saves
+        _load_data from breaking when the text contents would be just whitespace
+        or None.
+        """
+        if str:
+            if re.search(r'\S', str):
+                return True
+        return False  
         
-class Ranges:
-    """Models ranges in LIFT."""
-    def __init__(self, element):
-        if element:
-            self.range = [Range(i) for i in element.findall('range')]
+    def _load_data(self, element):
+        """Build dictionary of all data in Element.
+        
+        Data is held in an XML element in three ways: attribute key-value pair,
+        text contents, and child elements. 
+        """
+        data_dict = element.attrib
+        text = element.text
+        if self._has_content(text):
+            data_dict['text'] = text
+        for child in element:
+            # An element may have multiple subelements with same tag
+            if child.tag in data_dict:  
+                data_dict[child.tag].append(self._load_data(child))
+            else:
+                data_dict[child.tag] = [self._load_data(child)]
+        return data_dict        
+
+# === Lexicon ===
+
+class Lexicon(_FLEx):
+    def __init__(self, root, fileid):
+        _FLEx.__init__(self, root, fileid)
+        self.entries = [Entry(i) for i in self._data['entry']]
+        
+    def __str__(self):
+        """
+        Return a string representation of this lexicon.
+        :rtype: string
+        """
+        return '<Lexicon with {} entries>'.format((len(self._data['entry'])))
+       
+class Entry:
+    def __init__(self, data):
+        self._data = data
+        
+    # === Private methods ===
+      
+    def _multitext(self, element):
+        """Return text from multitext element."""
+        out = []
+        for elem in element:
+            for subelem in elem['form']:
+                for subsubelem in subelem['text']:
+                    out.append(subsubelem['text'])        
+        return out
+        
+    def _format_output(self, out):
+        """Return element of singleton list, else return whole list.
+        
+        Some fields in LIFT may have one or multiple values. This method provides
+        the most useful output.
+        """
+        if len(out) == 1:
+            return out[0]
+        return out
+        
+    def __str__(self):
+        """
+        Return a string representation of this entry.
+        :rtype: string
+        """
+        return '<{} entry in lexicon>'.format(self.headword())
     
-class Range:
-    """Models range in LIFT."""
-    def __init__(self, element):
-        if element:
-            self.id = element.get('id')
-            self.guid = element.get('guid')
-            self.href = element.get('href')
-            self.description = [Multitext(i) for i in element.findall('description')]
-            self.range = Range_Element(element.find('range-element'))
-            self.label = [Multitext(i) for i in element.findall('label')]
-            self.abbrev = [Multitext(i) for i in element.findall('abbrev')]
-           
-class Range_Element:
-    """Models range-element in LIFT."""
-    def __init__(self, element):
-        if element:
-            self.id = element.get('id')
-            self.parent = element.get('parent')
-            self.guid = element.get('guid')
-            self.label = [Multitext(i) for i in element.findall('label')]
-            self.description = [Multitext(i) for i in element.findall('description')]
-            self.abbrev = [Multitext(i) for i in element.findall('abbrev')]
-            
-class Field_Defns:
-    """Models fields-defns in LIFT."""
-    def __init__(self, element):
-         if element:
-             self.field = [Field(i) for i in element.findall('field')]
+    # === Public methods ===
+    
+    def headword(self):
+        """Return headword of Entry."""
+        lexical_unit = self._data['lexical-unit']
+        headwords = self._multitext(lexical_unit)
+        return self._format_output(headwords)
+        
+    def citation(self):
+        """Return citation form of Entry."""
+        citation = self._data['citation']
+        citations = self._multitext(citations)
+        return self._format_output(citations)
+        
+    def pos(self):
+        """Return POS of Entry."""
+        out = []
+        senses = self._data['sense']
+        for sense in senses:
+            pos = sense['grammatical-info'][0]['value']
+            out.append(pos)
+        return self._format_output(out)
+    
+    def gloss(self):
+        """Return gloss of Entry."""
+        out = []
+        senses = self._data['sense']
+        for sense in senses:
+            gloss = sense['gloss'][0]['text'][0]['text']
+            out.append(gloss)
+        return self._format_output(out)
 
-class Field_Defn(Multitext):
-    """Models fields-defns in LIFT.""" 
-    def __init__(self, element):
-        if element:
-            Multitext.__init__(self, element)
-            self.tag = element.get('tag')
-            
-
-# === FLExtext ===      
-
-class Text(XMLCorpusReader):
+# === Text ===      
+        
+class Text(_FLEx):
     """Corpus reader for FLEx's flextext files.
 
     For access to the complete XML data structure, use the ``xml()``
@@ -357,5 +195,42 @@ class Text(XMLCorpusReader):
     ``words()``, ``sents()``.
     """
     def __init__(self, root, fileid):
-        XMLCorpusReader.__init__(self, root, fileid)
-        self._fileid = fileid
+        _FLEx.__init__(self, root, fileid)
+        
+    def __str__(self):
+        """
+        Return a string representation of this text.
+        :rtype: string
+        """
+        num_of_words = sum([1 for elem in self.elt.iter('word')])
+        return '<Text with {} words>'.format(num_of_words)
+    
+    # === Public methods ===
+    
+    def paras(self):
+        pass
+
+    def sents(self):
+        out = []
+        for sent in self.elt.iter('phrase'):
+            one_sent = []
+            for word in sent.iter('word'):
+                for item in word:
+                    item_type = item.attrib['type']
+                    if item_type == 'txt' or item_type == 'punct':
+                        one_sent.append(item.attrib['text'])
+            out.append(one_sent)
+        return out
+    
+    def words(self):
+        out = []
+        for word in self.elt.iter('word'):
+            for item in word:
+                item_type = item.attrib['type']
+                if item_type == 'txt' or item_type == 'punct':
+                    out.append(item.attrib['text'])  
+        return out
+        
+    def raw(self):
+        """TODO: Wrong spacing with punctuation."""
+        return " ".join(self.words())
