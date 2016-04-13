@@ -11,19 +11,6 @@ Lexicon             Models a lexicon document.
     version()       Return verison of lexicon.
     entries         List of entries in lexicon.
 
-Entry               Models an entry in a lexicon.
-    headword()        
-    gloss()
-    pos()
-    citation()
-    guid()
-    order()
-    date_created()
-    date_modified()
-    note()
-    variant()
-    write()
-
 Text                Models a text document.
     sents()
     words()
@@ -143,12 +130,13 @@ Write changes to new file:
 
 To do
 -----
-
-TODO: Are any more public methods needed?
-TODO: Is there a better way to handle errors in public methods?
+TODO: change docstring to reflect this week's changes.
+TODO: _multitext
+TODO: rewrite Text methods to use _data, not elt. 
 TODO: Text.raw() has wrong spacing for punctuation.
 """
 import re
+from collections import defaultdict
 from nltk.corpus.reader.xmldocs import XMLCorpusReader, ElementTree
 
 # === Utilities ===
@@ -161,41 +149,38 @@ def _xml_to_dict(element):
     text contents, and child elements. The returned dictionary does not 
     maintain these distinctions. 
     """
-    dict = element.attrib
+    d = defaultdict(list)
+    d.update(element.attrib)
     text = element.text
     if text:
         text = text.strip()
         if text:
         # LIFT has an element called 'text', so 'rtext' is the real text of an element.
-            dict['rtext'] = text
+            d['rtext'] = text
     for child in element:
         # An element may have multiple subelements with same tag
-        tag = child.tag
-        if tag in dict:  
-            dict[tag].append(_xml_to_dict(child))
-        else:
-            dict[tag] = [_xml_to_dict(child)]
-    return dict
+        d[child.tag].append(_xml_to_dict(child))
+    return d
 
-def _dict_to_xml(dictn, element, attributes):
+def _dict_to_xml(d, element, attributes):
     """
-    Build XML of all data in Dictn.
+    Build XML of all data in D.
     
-    Attribute is list of keys in Dictn that should be attributes.
+    Attribute is list of keys in D that should be attributes.
     Element is root element of XML.
     """
-    for key in dictn:
+    for key in d:
         if key == 'rtext':
-            element.text = dictn[key]
+            element.text = d[key]
         elif key in attributes:
-            element.set(key, dictn[key])
+            element.set(key, d[key])
         else:
-            for child_dict in dictn[key]:
+            for child_dict in d[key]:
                 subelement = ElementTree.SubElement(element, key)
                 _dict_to_xml(child_dict, subelement, attributes)
     return element
 
-class _FLEx(XMLCorpusReader):
+class FLEx(XMLCorpusReader):
     """A base class for FLEx based classes."""
     def __init__(self, root, fileid):
         XMLCorpusReader.__init__(self, root, fileid)
@@ -203,7 +188,7 @@ class _FLEx(XMLCorpusReader):
         self.elt = self.xml()
         self._data = _xml_to_dict(self.elt)   
     
-    def _write(self, file, attributes, root_tag):
+    def write(self, file, attributes, root_tag):
         """Writes to file."""
         if file == self._fileid:
             print("Warning: you were about to write over original file")
@@ -211,20 +196,47 @@ class _FLEx(XMLCorpusReader):
         root = ElementTree.Element(root_tag)
         tree = _dict_to_xml(self._data, root, attributes)
         tree = ElementTree.ElementTree(tree)             
-        tree.write(file, encoding='utf-8')     
+        tree.write(file, encoding='utf-8')
 
 # === Lexicon ===
 
-class Lexicon(_FLEx):
+class Lexicon(FLEx):
     """
     Corpus reader for LIFT lexicons.
     
     LIFT is SIL's Lexicon Interchange FormaT, an XML schema for lexicons.
     """
     def __init__(self, root, fileid):
-        _FLEx.__init__(self, root, fileid)
-        self.entries = [Entry(i) for i in self._data['entry']]
+        FLEx.__init__(self, root, fileid)
+        self.entries = [self._build_entry(entry) for entry in self._data['entry']]
         
+    def _build_entry(self, e):
+        """Builds user-friendly dictionary from E."""
+        d = defaultdict(list)
+        d['guid'] = e.get('guid', [])
+        d['order'] = e.get('order', [])
+        d['dateCreated'] = e.get('dateCreated', [])
+        d['dateModified'] = e.get('dateModified', [])
+        senses = e.get('sense', [])
+        d['pos'] = [sense['grammatical-info'][0]['value'] for sense in senses]
+        d['gloss'] = [sense['gloss'][0]['text'][0]['rtext'] for sense in senses]
+        lexical_unit = e.get('lexical-unit', [])
+        d['headword'] = lexical_unit #self._multitext(lexical-unit)
+        citation = e.get('citation', [])
+        d['citation'] = citation
+        note = e.get('note', [])
+        d['note'] = note
+        variant = e.get('variant', [])
+        d['variant'] = variant
+        return d  
+        
+    def _multitext(self, unit):
+        """
+        Return text from multitext element in LIFT.
+        :rtype: list of strings
+        """  
+        return [form['text'][0]['rtext'] for form in unit[0]['form']]      
+   
     def __str__(self):
         """
         Return a string representation of this lexicon.
@@ -245,146 +257,11 @@ class Lexicon(_FLEx):
                       'dateModified', 'dateCreated', 'dateDeleted', 'name', 
                       'value', 'who', 'when', 'order', 'guid', 'version', 
                       'producer', 'id', 'parent', 'tag']
-        self._write(file, attributes, 'lift') 
- 
-class Entry:
-    """A model of an entry in a LIFT lexicon."""
-    def __init__(self, data):
-        self._data = data
-          
-    def _multitext(self, element):
-        """
-        Return text from multitext element in LIFT.
-        :rtype: list of strings
-        """
-        out = []
-        for elem in element:
-            for subelem in elem['form']:
-                for subsubelem in subelem['text']:
-                    out.append(subsubelem['rtext'])        
-        return out
-        
-    def __str__(self):
-        """
-        Return a string representation of this entry.
-        :rtype: string
-        """
-        return '<{} entry in lexicon>'.format(self.headword()[0])
-        
-    def headword(self):
-        """
-        Return headword of Entry.
-        :rtype: list of strings
-        """
-        try:
-            lexical_unit = self._data['lexical-unit']
-            return self._multitext(lexical_unit)
-        except KeyError:
-            print("No data")
-
-    def citation(self):
-        """
-        Return citation form of Entry.
-        :rtype: list of strings
-        """
-        try:
-            citation = self._data['citation']
-            return self._multitext(citations)
-        except KeyError:
-            print("No data")
-        
-    def pos(self):
-        """
-        Return syntactic category of Entry.
-        :rtype: list of strings
-        """
-        try:
-            senses = self._data['sense']
-            out = []
-            for sense in senses:
-                pos = sense['grammatical-info'][0]['value']
-                out.append(pos)
-            return out
-        except KeyError:
-            print("No data") # Should it print or return?
-    
-    def gloss(self):
-        """
-        Return gloss of Entry.
-        :rtype: list of strings
-        """
-        try:
-            out = []
-            senses = self._data['sense']
-            for sense in senses:
-                gloss = sense['gloss'][0]['text'][0]['rtext']
-                out.append(gloss)
-            return out
-        except KeyError:
-            print("No data")
-    
-    def guid(self):
-        """
-        Return global unique id of this entry.
-        :rtype: string
-        """
-        return self._data['guid']
-        
-    def order(self):
-        """
-        Return order of this entry in the lexicon.
-        :rtype: int
-        """
-        try:
-            return int(self._data['order'])
-        except KeyError:
-            print("No data")
-    
-    def date_created(self):
-        """
-        Return date this entry was created.
-        :rtype: string
-        """
-        try:
-            return self._data['dateCreated']
-        except KeyError:
-            print("No data")
-    
-    def date_modified(self):
-        """
-        Return date this entry was last modified.
-        :rtype: string
-        """
-        try:
-            return self._data['dateModified']
-        except KeyError:
-            print("No data")
-    
-    def note(self):
-        """
-        Return note text of this entry.
-        :rtype: string
-        """
-        try:
-            note = self._data['note']
-            return self._multitext(note)
-        except KeyError:
-            print("No data")
-    
-    def variant(self):
-        """
-        Return variant text of this entry.
-        :rtype: string
-        """
-        try:
-            variant = self._data['variant']
-            return self._multitext(variant)
-        except KeyError:
-            print("No data")
+        super().write(file, attributes, 'lift')
                       
 # === Text ===      
         
-class Text(_FLEx):
+class Text(FLEx):
     """
     Corpus reader for FLEx's flextext texts.
     
@@ -393,7 +270,7 @@ class Text(_FLEx):
     use ``words()`` and ``sents()``.
     """
     def __init__(self, root, fileid):
-        _FLEx.__init__(self, root, fileid)
+        FLEx.__init__(self, root, fileid)
         
     def __str__(self):
         """
@@ -417,9 +294,18 @@ class Text(_FLEx):
                 for item in word:
                     item_type = item.attrib['type']
                     if item_type == 'txt' or item_type == 'punct':
-                        one_sent.append(item.attrib['rtext'])
+                        one_sent.append(item.text)
             out.append(one_sent)
         return out
+        
+    def tagged_sents(self):
+        """
+        Returns all of the words and punctuation symbols in the text tagged with pos.
+
+        :return: the text's text nodes as a list of words and punctuation symbols
+        :rtype: list((str, str))
+        """
+        pass
     
     def words(self):
         """
@@ -433,9 +319,18 @@ class Text(_FLEx):
             for item in word:
                 item_type = item.get('type')
                 if item_type == 'txt' or item_type == 'punct':
-                    out.append(item.get('rtext'))  
+                    out.append(item.text)  
         return out
         
+    def tagged_words(self):
+        """
+        Returns all of the words and punctuation symbols in the text tagged with pos.
+
+        :return: the text's text nodes as a list of words and punctuation symbols
+        :rtype: list((str, str))
+        """
+        return [(word, tag) for word, tag in zip(mb.words(), mb._pos())]
+            
     def raw(self):
         """
         Returns all of the words and punctuation symbols in the text as one string.
@@ -445,7 +340,7 @@ class Text(_FLEx):
         """
         return " ".join(self.words())
 
-    def pos(self):
+    def _pos(self):
         """
         Returns the POS of words and punctuation symbols in the text.
 
@@ -468,5 +363,5 @@ class Text(_FLEx):
         """Writes to file."""
         attributes = ['lang', 'guid', 'type', 'version', 'font', 
                       'vernacular'] # More?
-        self._write(file, attributes, 'document')
+        super().write(file, attributes, 'document')
     
