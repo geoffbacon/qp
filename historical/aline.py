@@ -1,11 +1,32 @@
+# ALINE
+
 """
 Module for aligning phonetic strings.
 
-This module provides functions for phonetic sequence alignment and similarity 
-analysis. These are useful in historical linguistics, sociolinguistics and 
-synchronic phonology.
+This module is a port of Kondrak's (2002) ALINE. It provides functions for 
+phonetic sequence alignment and similarity analysis. These are useful in 
+historical linguistics, sociolinguistics and synchronic phonology.
 
-TODO: Docstring
+Example usage
+-------------
+
+# Get optimal alignment of two phonetic sequences
+
+>>> align('θin', 'tenwis')
+[[('θ', 't'), ('i', 'e'), ('n', 'n'), ('-', 'w'), ('-', 'i'), ('-', 's')]]
+
+# Get near-optimal alignments of two phonetic sequences
+
+>>> align('təŋ','tsuŋə', 0.1)
+[[('t', 't'), ('-', 's'), ('ə', 'u'), ('ŋ', 'ŋ'), ('-', 'ə')],
+[('t', 'ts'), ('ə', 'u'), ('ŋ', 'ŋ'), ('-', 'ə')]]
+
+# Read in a CSV file of comparative data:
+
+>>> cognates = load_data('data/aline_test.csv')
+
+TODO: Documentation
+TODO: Add more IPA symbols
 """
 import csv
 import numpy as np
@@ -39,11 +60,11 @@ def load_data(file):
  
 inf = float('inf')
     
-# Default values for maximum similarity scores, (Kondrak 2002: 54) 
+# Default values for maximum similarity scores (Kondrak 2002: 54) 
 C_skip = 10 # Indels
 C_sub = 35  # Substitutions
 C_exp = 45  # Expansions/compressions
-C_vwl = 5  # Vowel/consonant relative weight, decreased from 10. 
+C_vwl = 5  # Vowel/consonant relative weight (decreased from 10) 
 
 consonants = ['B', 'N', 'R', 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 
               'n', 'p', 'q', 'r', 's', 't', 'v', 'x', 'z', 'ç', 'ð', 'ħ', 
@@ -54,20 +75,21 @@ consonants = ['B', 'N', 'R', 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
 # Relevant features for comparing consonants and vowels
 R_c = ['aspirated', 'lateral', 'manner', 'nasal', 'place', 'retroflex',
        'syllabic', 'voice']
+# 'high' taken out of R_v because same as manner
 R_v = ['back', 'lateral', 'long', 'manner', 'nasal', 'place',
-       'retroflex', 'round', 'syllabic', 'voice'] # 'high' taken out because same as manner
+       'retroflex', 'round', 'syllabic', 'voice'] 
 
 # Flattened feature matrix (Kondrak 2002: 56)
 similarity_matrix = {
                      #place
-                     'bilabial': 1.0, 'labiodental': 0.95, 'dental': 0.9, 'alveolar': 0.85,
-                     'retroflex': 0.8, 'palato-alveolar': 0.75, 'palatal': 0.7, 'velar': 0.6,
-                     'uvular': 0.5, 'pharyngeal': 0.3, 'glottal': 0.1, 'labiovelar': 1.0,
-                     'vowel': -1.0,
+                     'bilabial': 1.0, 'labiodental': 0.95, 'dental': 0.9, 
+                     'alveolar': 0.85, 'retroflex': 0.8, 'palato-alveolar': 0.75,
+                     'palatal': 0.7, 'velar': 0.6, 'uvular': 0.5, 'pharyngeal': 0.3,
+                     'glottal': 0.1, 'labiovelar': 1.0, 'vowel': -1.0,
                      #manner
                      'stop': 1.0, 'affricate': 0.9, 'fricative': 0.8, 'trill': 0.7,
-                     'tap': 0.65, 'approximant': 0.6, 'high vowel': 0.4, 'mid vowel': 0.2, 
-                     'low vowel': 0.0, 'vowel': 0.5,
+                     'tap': 0.65, 'approximant': 0.6, 'high vowel': 0.4,
+                     'mid vowel': 0.2, 'low vowel': 0.0, 'vowel': 0.5,
                      #high
                      'high': 1.0, 'mid': 0.5, 'low': 0.0,
                      #back
@@ -76,7 +98,8 @@ similarity_matrix = {
                      'plus': 1.0, 'minus': 0.0}
 
 # Relative weights of phonetic features (Kondrak 2002: 55)          
-salience = {'syllabic': 5, 
+salience = {
+            'syllabic': 5, 
 			'place': 40, 
 			'manner': 50, 
 			'voice': 10, 
@@ -87,7 +110,8 @@ salience = {'syllabic': 5,
 			'long': 1, 
 			'high': 3, 
 			'back': 3, 
-			'round': 3}
+			'round': 3
+			}
             
 # (Kondrak 2002: 59-60)        
 feature_matrix = {
@@ -462,21 +486,8 @@ def V(p):
         return 0
     return C_vwl
     
-# === Test data ===
+# === Useful when testing ===
 
 sounds = feature_matrix.keys()
 vowels = [s for s in sounds if s not in consonants]
 data = load_data('data/aline_test.csv')
-
-
-
-
-
-
-
-
-
-
-
-
-               
