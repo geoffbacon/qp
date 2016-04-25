@@ -5,8 +5,6 @@ This module provides functions for phonetic sequence alignment and similarity
 analysis. These are useful in historical linguistics, sociolinguistics and 
 synchronic phonology.
 
-TODO: Make retreive work
-TODO: Coverting to Kondrak's orthography
 TODO: Docstring
 """
 import csv
@@ -45,25 +43,31 @@ inf = float('inf')
 C_skip = 10 # Indels
 C_sub = 35  # Substitutions
 C_exp = 45  # Expansions/compressions
-C_vwl = 10  # Vowel/consonant relative weight
+C_vwl = 5  # Vowel/consonant relative weight, decreased from 10. 
 
-consonants = ['b', 'c', 'd', 'f', 'g', 'g', 'j', 'k', 'l', 'm', 'n', 'p', 'q',
-              'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+consonants = ['B', 'N', 'R', 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 
+              'n', 'p', 'q', 'r', 's', 't', 'v', 'x', 'z', 'ç', 'ð', 'ħ', 
+              'ŋ', 'ɖ', 'ɟ', 'ɢ', 'ɣ', 'ɦ', 'ɬ', 'ɮ', 'ɰ', 'ɱ', 'ɲ', 'ɳ', 'ɴ', 
+              'ɸ', 'ɹ', 'ɻ', 'ɽ', 'ɾ', 'ʀ', 'ʁ', 'ʂ', 'ʃ', 'ʈ', 'ʋ', 'ʐ ', 'ʒ',
+              'ʔ', 'ʕ', 'ʙ', 'ʝ', 'β', 'θ', 'χ', 'ʐ', 'w']
 
 # Relevant features for comparing consonants and vowels
-R_c = ['syllabic', 'manner', 'voice', 'nasal', 'retroflex', 'lateral', 
-       'place'] # 'aspirated' removed for time being
-R_v = ['syllabic', 'nasal', 'retroflex', 'high', 'back', 'round'] # 'long' removed for time being
+R_c = ['aspirated', 'lateral', 'manner', 'nasal', 'place', 'retroflex',
+       'syllabic', 'voice']
+R_v = ['back', 'lateral', 'long', 'manner', 'nasal', 'place',
+       'retroflex', 'round', 'syllabic', 'voice'] # 'high' taken out because same as manner
 
 # Flattened feature matrix (Kondrak 2002: 56)
 similarity_matrix = {
                      #place
                      'bilabial': 1.0, 'labiodental': 0.95, 'dental': 0.9, 'alveolar': 0.85,
                      'retroflex': 0.8, 'palato-alveolar': 0.75, 'palatal': 0.7, 'velar': 0.6,
-                     'uvular': 0.5, 'pharyngeal': 0.3, 'glottal': 0.1,
+                     'uvular': 0.5, 'pharyngeal': 0.3, 'glottal': 0.1, 'labiovelar': 1.0,
+                     'vowel': -1.0,
                      #manner
-                     'stop': 1.0, 'affricate': 0.9, 'fricative': 0.8, 'approximant': 0.6,
-                     'high vowel': 0.4, 'mid vowel': 0.2, 'low vowel': 0.0, 
+                     'stop': 1.0, 'affricate': 0.9, 'fricative': 0.8, 'trill': 0.7,
+                     'tap': 0.65, 'approximant': 0.6, 'high vowel': 0.4, 'mid vowel': 0.2, 
+                     'low vowel': 0.0, 'vowel': 0.5,
                      #high
                      'high': 1.0, 'mid': 0.5, 'low': 0.0,
                      #back
@@ -81,105 +85,248 @@ salience = {'syllabic': 5,
 			'lateral': 10, 
 			'aspirated': 5,
 			'long': 1, 
-			'high': 5, 
-			'back': 5, 
-			'round': 5}
+			'high': 3, 
+			'back': 3, 
+			'round': 3}
             
 # (Kondrak 2002: 59-60)        
 feature_matrix = {
-                  'a': {'place': 'velar', 'manner': 'low vowel', 'syllabic': 
-                  'plus', 'voice': 'plus', 'nasal': 'minus', 'retroflex': 
-                  'minus', 'lateral': 'minus', 'high': 'low', 'back': 'central',
-                  'round': 'minus'}, 
+# Consonants
+'p': {'place': 'bilabial', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
                   
-                  'b': {'place': 'bilabial', 'manner': 'stop',
-                  'syllabic': 'minus', 'voice': 'plus', 'nasal': 'minus', 'retroflex': 'minus',
-                  'lateral': 'minus'},
-                   
-                  'c': {'place': 'alveolar', 'manner': 'stop', 'syllabic': 'minus',
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'}, 
-                  
-                  'd': {'place': 'alveolar', 'manner': 'stop', 'syllabic': 'minus',
-                  'voice': 'plus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'}, 
-                  
-                  'e': {'place': 'palatal', 'manner': 'mid vowel', 'syllabic': 
-                  'plus', 'voice': 'plus', 'nasal': 'minus', 'retroflex': 
-                  'minus', 'lateral': 'minus', 'high': 'mid', 'back': 'front',
-                  'round': 'minus'},
-                  
-                  'f': {'place': 'labiodental', 'manner': 'fricative', 'syllabic': 'minus', 
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'g': {'place': 'velar', 'manner': 'stop', 'syllabic': 'minus', 
-                  'voice': 'plus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'h': {'place': 'glottal', 'manner': 'fricative', 'syllabic': 'minus', 
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'i': {'place': 'palatal', 'manner': 'high vowel', 'syllabic': 
-                  'plus', 'voice': 'plus', 'nasal': 'minus', 'retroflex': 
-                  'minus', 'lateral': 'minus', 'high': 'high', 'back': 'front',
-                  'round': 'minus'},
-                  
-                  'j': {'place': 'alveolar', 'manner': 'affricate', 'syllabic': 'minus', 
-                  'voice': 'plus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'k': {'place': 'velar', 'manner': 'stop', 'syllabic': 'minus', 
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'l': {'place': 'alveolar', 'manner': 'approximant', 'syllabic': 'minus', 
-                  'voice': 'plus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'plus'},
-                  
-                  'm': {'place': 'bilabial', 'manner': 'stop', 'syllabic': 'minus', 
-                  'voice': 'plus', 'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'n': {'place': 'alveolar', 'manner': 'stop', 'syllabic': 'minus', 
-                  'voice': 'plus', 'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'o': {'place': 'velar', 'manner': 'mid vowel', 'syllabic': 
-                  'plus', 'voice': 'plus', 'nasal': 'minus', 'retroflex': 
-                  'minus', 'lateral': 'minus', 'high': 'mid', 'back': 'back',
-                  'round': 'plus'},
-                  
-                  'p': {'place': 'bilabial', 'manner': 'stop', 'syllabic': 'minus', 
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'q': {'place': 'glottal', 'manner': 'stop', 'syllabic': 'minus', 
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'r': {'place': 'retroflex', 'manner': 'approximant', 'syllabic': 'minus', 
-                  'voice': 'plus', 'nasal': 'minus', 'retroflex': 'plus', 'lateral': 'minus'},
-                  
-                  's': {'place': 'alveolar', 'manner': 'fricative', 'syllabic': 'minus', 
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  't': {'place': 'alveolar', 'manner': 'stop', 'syllabic': 'minus', 
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'u': {'place': 'velar', 'manner': 'high vowel', 'syllabic': 
-                  'plus', 'voice': 'plus', 'nasal': 'minus', 'retroflex': 
-                  'minus', 'lateral': 'minus', 'high': 'high', 'back': 'back',
-                  'round': 'plus'},
-                  
-                  'v': {'place': 'labiodental', 'manner': 'fricative', 'syllabic': 'minus', 
-                  'voice': 'plus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'w': {'place': 'velar', 'manner': 'low vowel', 'syllabic': 
-                  'plus', 'voice': 'plus', 'nasal': 'minus', 'retroflex': 
-                  'minus', 'lateral': 'minus', 'high': 'high', 'back': 'back',
-                  'round': 'plus'}, #labiovelar
-                  
-                  'x': {'place': 'velar', 'manner': 'fricative', 'syllabic': 'minus', 
-                  'voice': 'minus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  
-                  'y': {'place': 'velar', 'manner': 'low vowel', 'syllabic': 
-                  'plus', 'voice': 'plus', 'nasal': 'minus', 'retroflex': 
-                  'minus', 'lateral': 'minus', 'high': 'high', 'back': 'front',
-                  'round': 'minus'},
-                  
-                  'z': {'place': 'alveolar', 'manner': 'fricative', 'syllabic': 'minus', 
-                  'voice': 'plus', 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus'},
-                  }
+'b': {'place': 'bilabial', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'t': {'place': 'alveolar', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'d': {'place': 'alveolar', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʈ': {'place': 'retroflex', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'plus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɖ': {'place': 'retroflex', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'plus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'c': {'place': 'palatal', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɟ': {'place': 'palatal', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'k': {'place': 'velar', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'g': {'place': 'velar', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'q': {'place': 'uvular', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɢ': {'place': 'uvular', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʔ': {'place': 'glottal', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'m': {'place': 'bilabial', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɱ': {'place': 'labiodental', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'n': {'place': 'alveolar', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɳ': {'place': 'retroflex', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'plus', 'retroflex': 'plus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɲ': {'place': 'palatal', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ŋ': {'place': 'velar', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɴ': {'place': 'uvular', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'N': {'place': 'uvular', 'manner': 'stop', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'plus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʙ': {'place': 'bilabial', 'manner': 'trill', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'B': {'place': 'bilabial', 'manner': 'trill', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'r': {'place': 'alveolar', 'manner': 'trill', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'plus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʀ': {'place': 'uvular', 'manner': 'trill', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'R': {'place': 'uvular', 'manner': 'trill', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɾ': {'place': 'alveolar', 'manner': 'tap', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɽ': {'place': 'retroflex', 'manner': 'tap', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'plus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɸ': {'place': 'bilabial', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'β': {'place': 'bilabial', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'f': {'place': 'labiodental', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'v': {'place': 'labiodental', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'θ': {'place': 'dental', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ð': {'place': 'labiodental', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'s': {'place': 'alveolar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'z': {'place': 'alveolar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʃ': {'place': 'palato-alveolar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʒ': {'place': 'palato-alveolar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʂ': {'place': 'retroflex', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'plus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʐ': {'place': 'retroflex', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'plus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ç': {'place': 'palatal', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʝ': {'place': 'palatal', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'x': {'place': 'velar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɣ': {'place': 'velar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'χ': {'place': 'uvular', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʁ': {'place': 'uvular', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ħ': {'place': 'pharyngeal', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ʕ': {'place': 'pharyngeal', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'h': {'place': 'glottal', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɦ': {'place': 'glottal', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɬ': {'place': 'alveolar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'plus', 'aspirated': 'minus'},
+
+'ɮ': {'place': 'alveolar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'plus', 'aspirated': 'minus'},
+
+'ʋ': {'place': 'labiodental', 'manner': 'approximant', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɹ': {'place': 'alveolar', 'manner': 'approximant', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɻ': {'place': 'retroflex', 'manner': 'approximant', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'plus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'j': {'place': 'palatal', 'manner': 'approximant', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'ɰ': {'place': 'velar', 'manner': 'approximant', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+'l': {'place': 'alveolar', 'manner': 'approximant', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'plus', 'aspirated': 'minus'},
+
+'w': {'place': 'labiovelar', 'manner': 'approximant', 'syllabic': 'minus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
+
+# Vowels
+
+'i': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
+'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
+'y': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
+'back': 'front','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
+
+'e': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
+'ø': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'front','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
+
+'ɛ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
+'œ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'front','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
+
+'a': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
+'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
+'ɨ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
+'back': 'central','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
+'ʉ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
+'back': 'central','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
+
+'ə': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'central','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
+'u': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
+'back': 'back','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
+
+'o': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'back','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
+
+'ɔ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'back','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
+
+'ɒ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
+'back': 'back','round': 'minus', 'long': 'minus', 'aspirated': 'minus'}
+}
 
 # === Algorithm ===
  
@@ -231,23 +378,21 @@ def _retrieve(i, j, s, S, T, str1, str2, out):
     if S[i, j] == 0:
         return out
     else:
-        if S[i-1, j-1] + sigma_sub(str1[i-1], str2[j-1]) + s >= T:
+        if j > 1 and S[i-1, j-2] + sigma_exp(str1[i-1], str2[j-2:j]) + s >= T:
+            out.insert(0, (str1[i-1], str2[j-2:j]))
+            _retrieve(i-1, j-2, s+sigma_exp(str1[i-1], str2[j-2:j]), S, T, str1, str2, out) 
+        elif i > 1 and S[i-2, j-1] + sigma_exp(str2[j-1], str1[i-2:i]) + s >= T:
+            out.insert(0, (str1[i-2:i], str2[j-1]))
+            _retrieve(i-2, j-1, s+sigma_exp(str2[j-1], str1[i-2:i]), S, T, str1, str2, out)
+        elif S[i-1, j-1] + sigma_sub(str1[i-1], str2[j-1]) + s >= T:
             out.insert(0, (str1[i-1], str2[j-1]))
             _retrieve(i-1, j-1, s+sigma_sub(str1[i-1], str2[j-1]), S, T, str1, str2, out)
         elif S[i, j-1] + sigma_skip(str2[j-1]) + s >= T:
             out.insert(0, ('-', str2[j-1]))
             _retrieve(i, j-1, s+sigma_skip(str2[j-1]), S, T, str1, str2, out)
-        elif j > 1:
-            if S[i-1, j-2] + sigma_exp(str1[i-1], str2[j-2:j]) + s >= T:
-                out.insert(0, (str1[i-1], str2[j-2:j]))
-                _retrieve(i-1, j-2, s+sigma_exp(str1[i-1], str2[j-2:j]), S, T, str1, str2, out)    
         elif S[i-1, j] + sigma_skip(str1[i-1]) + s >= T:
             out.insert(0, (str1[i-1], '-'))
             _retrieve(i-1, j, s+sigma_skip(str1[i-1]), S, T, str1, str2, out)
-        elif i > 1:
-            if S[i-2, j-1] + sigma_exp(str2[j-1], str1[i-2:i]) + s >= T:
-                out.insert(0, (str1[i-2:i], str2[j-1]))
-                _retrieve(i-2, j-1, s+sigma_exp(str2[j-1], str1[i-2:i]), S, T, str1, str2, out)
     return out
        
 def sigma_skip(p):
@@ -272,7 +417,9 @@ def sigma_exp(p, q):
     
     (Kondrak 2002: 54)
     """
-    return C_exp - delta(p, q[0]) - delta(p, q[1]) - V(p) - max(V(q[0]), V(q[1]))
+    q1 = q[0]
+    q2 = q[1]
+    return C_exp - delta(p, q1) - delta(p, q2) - V(p) - max(V(q1), V(q2))
     
 def delta(p, q):
     """
@@ -288,12 +435,12 @@ def delta(p, q):
     
 def diff(p, q, f):
     """
-    Returns difference between phonetic segments P and Q in feature F.
+    Returns difference between phonetic segments P and Q for feature F.
     
     (Kondrak 2002: 52, 54)
     """
     p_features, q_features = feature_matrix[p], feature_matrix[q]
-    return similarity_matrix[p_features[f]] - similarity_matrix[q_features[f]]
+    return abs(similarity_matrix[p_features[f]] - similarity_matrix[q_features[f]])
         
 def R(p, q):
     """
@@ -314,4 +461,22 @@ def V(p):
     if p in consonants:
         return 0
     return C_vwl
+    
+# === Test data ===
+
+sounds = feature_matrix.keys()
+vowels = [s for s in sounds if s not in consonants]
+data = load_data('data/aline_test.csv')
+
+
+
+
+
+
+
+
+
+
+
+
                
