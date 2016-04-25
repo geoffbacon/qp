@@ -1,5 +1,6 @@
 # FLEx Corpus Reader
 
+
 """
 Corpus reader for FLEx lexicons and texts.
 
@@ -10,9 +11,8 @@ Classes and methods defined
 Definition          Description
 ================    =================================
 Lexicon             Models a lexicon document.
-    version()       Return verison of lexicon.
+    version()
     write()
-    entries         List of entries in lexicon.
 
 Text                Models a text document.
     sents()
@@ -183,7 +183,7 @@ class FLEx(XMLCorpusReader):
         XMLCorpusReader.__init__(self, root, fileid)
         self._fileid = self._fileids[0]
         self.elt = self.xml()
-        self._data = _xml_to_dict(self.elt)   
+        self.data = _xml_to_dict(self.elt)   
     
     def write(self, file, attributes, root_tag):
         """Writes to file."""
@@ -191,7 +191,7 @@ class FLEx(XMLCorpusReader):
             print("Warning: you were about to write over original file")
             return
         root = ElementTree.Element(root_tag)
-        tree = _dict_to_xml(self._data, root, attributes)
+        tree = _dict_to_xml(self.data, root, attributes)
         tree = ElementTree.ElementTree(tree)             
         tree.write(file, encoding='utf-8')
 
@@ -205,7 +205,7 @@ class Lexicon(FLEx):
     """
     def __init__(self, root, fileid):
         FLEx.__init__(self, root, fileid)
-        self.entries = [self._build_entry(entry) for entry in self._data['entry']]
+        self.entries = [self._build_entry(entry) for entry in self.data['entry']]
         
     def _build_entry(self, e):
         """Builds user-friendly dictionary from E."""
@@ -237,14 +237,14 @@ class Lexicon(FLEx):
         Return a string representation of this lexicon.
         :rtype: string
         """
-        return '<Lexicon with {} entries>'.format((len(self._data['entry'])))  
+        return '<Lexicon with {} entries>'.format((len(self.data['entry'])))  
         
     def version(self):
         """
         Return the LIFT version of this lexicon.
         :rtype: string
         """
-        return self._data['version']
+        return self.data['version']
     
     def write(self, file):
         """Writes to file."""
@@ -332,7 +332,7 @@ class Text(FLEx):
         """
         Returns all of the words and punctuation symbols in the text as one string.
 
-         :return: the text as a single string.
+        :return: the text as a single string.
         :rtype: str
         """
         return " ".join(self.words())
