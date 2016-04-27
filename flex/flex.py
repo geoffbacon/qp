@@ -1,5 +1,9 @@
-# FLEx Corpus Reader
-
+# Natural Language Toolkit: FLEx corpus reader
+#
+# Copyright (C) 2001-2015 NLTK Project
+# Author: Geoff Bacon <bacon@berkeley.edu>
+# URL: <http://nltk.org/>
+# For license information, see LICENSE.TXT
 
 """
 Corpus reader for FLEx lexicons and texts.
@@ -79,7 +83,7 @@ Example usage - Lexicon
         for headword in entry['headword']:
             pattern.sub('g', headword)
         
-
+        
 # Search for a specific tone pattern in headwords:
 
 >>> import unicodedata as uc
@@ -130,7 +134,6 @@ To do
 TODO: methods to modify text data 
 TODO: Global spelling change of only Tswefap data in any field
 TODO: Text.raw() has wrong spacing for punctuation
-TODO: Standardize docstrings
 """
 import re
 from collections import defaultdict
@@ -146,6 +149,12 @@ def _xml_to_dict(element):
     Data is held in an XML element in three ways: attribute key-value pair,
     text contents, and child elements. The returned dictionary does not 
     maintain these distinctions. 
+    
+    :type element: XML element
+    :param element: Element to extract information from
+    
+    :rtpye: defaultdict
+    :return: All information in Element as a dictionary
     """
     d = defaultdict(list)
     d.update(element.attrib)
@@ -165,6 +174,16 @@ def _dict_to_xml(d, element, attributes):
     Build XML Element of all data in D.
     
     Attribute is list of keys in D that should be attributes.
+    
+    :type d: dict
+    :param d: Dictionary to turn into XML
+    :type element: str
+    :param element: Tag of root element
+    :type attributes: list(str)
+    :param attributes: Keys that should be attributes, not children
+    
+    :rtpye: ElementTree
+    :return: All information in D as XML
     """
     for key in d:
         if key == 'rtext':
@@ -202,6 +221,11 @@ class Lexicon(FLEx):
     Corpus reader for LIFT lexicons.
     
     LIFT is SIL's Lexicon Interchange FormaT, an XML schema for lexicons.
+    
+    :type root: str
+    :param root: Path to LIFT file
+    :type fileid: str
+    :param fileid: LIFT file
     """
     def __init__(self, root, fileid):
         FLEx.__init__(self, root, fileid)
@@ -226,7 +250,7 @@ class Lexicon(FLEx):
     def _multitext(self, unit):
         """
         Return text from multitext element in LIFT.
-        :rtype: list of strings
+        :rtype: list(str)
         """  
         if unit:
             return [form['text'][0]['rtext'] for form in unit[0]['form']]
@@ -235,19 +259,26 @@ class Lexicon(FLEx):
     def __str__(self):
         """
         Return a string representation of this lexicon.
-        :rtype: string
+        :rtype: str
         """
         return '<Lexicon with {} entries>'.format((len(self.data['entry'])))  
         
     def version(self):
         """
         Return the LIFT version of this lexicon.
-        :rtype: string
+        :rtype: str
         """
         return self.data['version']
     
     def write(self, file):
-        """Writes to file."""
+                """
+        Write to file.
+        
+        :type file: str
+        :param file: File to write to
+        :type attributes: list(str)
+        :param attributes: Keys that should be attributes, not children
+        """
         attributes = ['lang', 'href', 'class', 'ref', 'type', 'source', 
                       'dateModified', 'dateCreated', 'dateDeleted', 'name', 
                       'value', 'who', 'when', 'order', 'guid', 'version', 
@@ -270,7 +301,7 @@ class Text(FLEx):
     def __str__(self):
         """
         Return a string representation of this text.
-        :rtype: string
+        :rtype: str
         """
         num_of_words = sum([1 for elem in self.elt.iter('word')])
         return '<Text with {} words>'.format(num_of_words)
@@ -360,7 +391,14 @@ class Text(FLEx):
         return out
         
     def write(self, file):
-        """Writes to file."""
+        """
+        Write to file.
+        
+        :type file: str
+        :param file: File to write to
+        :type attributes: list(str)
+        :param attributes: Keys that should be attributes, not children
+        """
         attributes = ['lang', 'guid', 'type', 'version', 'font', 
                       'vernacular'] # More?
         super().write(file, attributes, 'document')
