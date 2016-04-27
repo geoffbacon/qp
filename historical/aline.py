@@ -26,10 +26,11 @@ Example usage
 >>> cognates = load_data('data/aline_test.csv')
 
 TODO: Documentation
-TODO: Add more IPA symbols
 """
 import csv
 import numpy as np
+
+test = True
 
 # === Data handling ===
 
@@ -87,9 +88,9 @@ similarity_matrix = {
                      'palatal': 0.7, 'velar': 0.6, 'uvular': 0.5, 'pharyngeal': 0.3,
                      'glottal': 0.1, 'labiovelar': 1.0, 'vowel': -1.0,
                      #manner
-                     'stop': 1.0, 'affricate': 0.9, 'fricative': 0.8, 'trill': 0.7,
+                     'stop': 1.0, 'affricate': 0.9, 'fricative': 0.85, 'trill': 0.7,
                      'tap': 0.65, 'approximant': 0.6, 'high vowel': 0.4,
-                     'mid vowel': 0.2, 'low vowel': 0.0, 'vowel': 0.5,
+                     'mid vowel': 0.2, 'low vowel': 0.0, 'vowel': 0.5, # increased F from 0.8
                      #high
                      'high': 1.0, 'mid': 0.5, 'low': 0.0,
                      #back
@@ -102,15 +103,15 @@ salience = {
             'syllabic': 5, 
 			'place': 40, 
 			'manner': 50, 
-			'voice': 10, 
-			'nasal': 10,
+			'voice': 5, # decreased from 10
+			'nasal': 20, # increased from 10
 			'retroflex': 10, 
 			'lateral': 10, 
 			'aspirated': 5,
-			'long': 1, 
-			'high': 3, 
-			'back': 3, 
-			'round': 3
+			'long': 0, # decreased from 1 
+			'high': 3, # decreased from 5
+			'back': 2, # decreased from 5
+			'round': 2 # decreased from 5
 			}
             
 # (Kondrak 2002: 59-60)        
@@ -215,7 +216,7 @@ feature_matrix = {
 'θ': {'place': 'dental', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
 
-'ð': {'place': 'labiodental', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
+'ð': {'place': 'dental', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'aspirated': 'minus'},
 
 's': {'place': 'alveolar', 'manner': 'fricative', 'syllabic': 'minus', 'voice': 'minus',
@@ -307,6 +308,10 @@ feature_matrix = {
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
+'E': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'front','round': 'minus', 'long': 'plus', 'aspirated': 'minus'},
+
 'ø': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'front','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
@@ -319,9 +324,17 @@ feature_matrix = {
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'front','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
+'æ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
+'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
 'a': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
 'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
+'A': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
+'back': 'front','round': 'minus', 'long': 'plus', 'aspirated': 'minus'},
 
 'ɨ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
@@ -339,9 +352,17 @@ feature_matrix = {
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
 'back': 'back','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
+'U': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
+'back': 'back','round': 'plus', 'long': 'plus', 'aspirated': 'minus'},
+
 'o': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'back','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
+
+'O': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
+'back': 'back','round': 'plus', 'long': 'plus', 'aspirated': 'minus'},
 
 'ɔ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
@@ -349,7 +370,12 @@ feature_matrix = {
 
 'ɒ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
-'back': 'back','round': 'minus', 'long': 'minus', 'aspirated': 'minus'}
+'back': 'back','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
+
+'I': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
+'back': 'front','round': 'minus', 'long': 'plus', 'aspirated': 'minus'},
+
 }
 
 # === Algorithm ===
@@ -486,8 +512,9 @@ def V(p):
         return 0
     return C_vwl
     
-# === Useful when testing ===
-
-sounds = feature_matrix.keys()
-vowels = [s for s in sounds if s not in consonants]
-data = load_data('data/aline_test.csv')
+# === Test ===
+if test:
+    data = load_data('data/aline_test.csv')
+    for pair in data:
+        print(align(pair[0], pair[1])[0])
+        print()    
