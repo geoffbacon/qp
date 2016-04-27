@@ -1,11 +1,28 @@
-# ALINE
+# Natural Language Toolkit: ALINE
+#
+# Copyright (C) 2001-2015 NLTK Project
+# Author: Geoff Bacon <bacon@berkeley.edu>
+# URL: <http://nltk.org/>
+# For license information, see LICENSE.TXT
 
 """
-Module for aligning phonetic strings.
+ALINE
+http://webdocs.cs.ualberta.ca/~kondrak/
+Copyright 2002 by Grzegorz Kondrak.
 
+ALINE is an algorithm for aligning phonetic sequences, described in [1].
 This module is a port of Kondrak's (2002) ALINE. It provides functions for 
 phonetic sequence alignment and similarity analysis. These are useful in 
 historical linguistics, sociolinguistics and synchronic phonology.
+
+ALINE has parameters that can be tuned for desired output. These parameters are:
+- C_skip, C_sub, C_exp, C_vwl
+- Salience weights
+- Segmental features 
+
+In this implementation, some parameters have been changed from their default 
+values as described in [1], in order to replicate published results. All changes 
+are noted in comments.
 
 Example usage
 -------------
@@ -15,47 +32,10 @@ Example usage
 >>> align('θin', 'tenwis')
 [[('θ', 't'), ('i', 'e'), ('n', 'n'), ('-', 'w'), ('-', 'i'), ('-', 's')]]
 
-# Get near-optimal alignments of two phonetic sequences
-
->>> align('təŋ','tsuŋə', 0.1)
-[[('t', 't'), ('-', 's'), ('ə', 'u'), ('ŋ', 'ŋ'), ('-', 'ə')],
-[('t', 'ts'), ('ə', 'u'), ('ŋ', 'ŋ'), ('-', 'ə')]]
-
-# Read in a CSV file of comparative data:
-
->>> cognates = load_data('data/aline_test.csv')
-
-TODO: Documentation
+[1] G. Kondrak. Algorithms for Language Reconstruction. PhD dissertation, 
+University of Toronto.
 """
-import csv
 import numpy as np
-
-test = True
-
-# === Data handling ===
-
-def load_data(file):
-    """
-    Returns data from CSV wordlist.
-    
-    CSV file must be comma delimited.
-    CSV file contains one language per column, as many columns as needed.
-    CSV file contains cognates in the rows.
-
-    E.g.:
-    
-    w11, w12, w13, ..., w1n
-    ...
-    wm1, wm2, wm3, ..., wmn
-    
-    where wij is the ith word in the jth language.
-    """
-    with open(file, mode='rU') as f:
-        out = []
-        reader = csv.reader(f)
-        for row in reader:
-            out.append(row)
-    return out
 
 # === Constants ===
  
@@ -86,11 +66,11 @@ similarity_matrix = {
                      'bilabial': 1.0, 'labiodental': 0.95, 'dental': 0.9, 
                      'alveolar': 0.85, 'retroflex': 0.8, 'palato-alveolar': 0.75,
                      'palatal': 0.7, 'velar': 0.6, 'uvular': 0.5, 'pharyngeal': 0.3,
-                     'glottal': 0.1, 'labiovelar': 1.0, 'vowel': -1.0,
+                     'glottal': 0.1, 'labiovelar': 1.0, 'vowel': -1.0, # added 'vowel'
                      #manner
-                     'stop': 1.0, 'affricate': 0.9, 'fricative': 0.85, 'trill': 0.7,
-                     'tap': 0.65, 'approximant': 0.6, 'high vowel': 0.4,
-                     'mid vowel': 0.2, 'low vowel': 0.0, 'vowel': 0.5, # increased F from 0.8
+                     'stop': 1.0, 'affricate': 0.9, 'fricative': 0.85, # increased fricative from 0.8
+                     'trill': 0.7, 'tap': 0.65, 'approximant': 0.6, 'high vowel': 0.4,
+                     'mid vowel': 0.2, 'low vowel': 0.0, 'vowel2': 0.5, # added vowel
                      #high
                      'high': 1.0, 'mid': 0.5, 'low': 0.0,
                      #back
@@ -296,83 +276,83 @@ feature_matrix = {
 
 # Vowels
 
-'i': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'i': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
 'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
-'y': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'y': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
 'back': 'front','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
-'e': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'e': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
-'E': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'E': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'front','round': 'minus', 'long': 'plus', 'aspirated': 'minus'},
 
-'ø': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'ø': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'front','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
-'ɛ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'ɛ': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
-'œ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'œ': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'front','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
-'æ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'æ': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
 'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
-'a': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'a': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
 'back': 'front','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
-'A': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'A': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
 'back': 'front','round': 'minus', 'long': 'plus', 'aspirated': 'minus'},
 
-'ɨ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'ɨ': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
 'back': 'central','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
-'ʉ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'ʉ': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
 'back': 'central','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
-'ə': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'ə': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'central','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
-'u': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'u': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
 'back': 'back','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
-'U': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'U': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
 'back': 'back','round': 'plus', 'long': 'plus', 'aspirated': 'minus'},
 
-'o': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'o': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'back','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
-'O': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'O': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'back','round': 'plus', 'long': 'plus', 'aspirated': 'minus'},
 
-'ɔ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'ɔ': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'mid',
 'back': 'back','round': 'plus', 'long': 'minus', 'aspirated': 'minus'},
 
-'ɒ': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'ɒ': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'low',
 'back': 'back','round': 'minus', 'long': 'minus', 'aspirated': 'minus'},
 
-'I': {'place': 'vowel', 'manner': 'vowel', 'syllabic': 'plus', 'voice': 'plus',
+'I': {'place': 'vowel', 'manner': 'vowel2', 'syllabic': 'plus', 'voice': 'plus',
 'nasal': 'minus', 'retroflex': 'minus', 'lateral': 'minus', 'high': 'high',
 'back': 'front','round': 'minus', 'long': 'plus', 'aspirated': 'minus'},
 
@@ -383,9 +363,18 @@ feature_matrix = {
 def align(str1, str2, epsilon=0):
     """
     Compute the alignment of two phonetic strings.
+    
+    :type str1, str2: str
+    :param str1, str2: Two strings to be aligned
+    :type epsilon: float (0.0 to 1.0)
+    :param epsilon: Adjusts threshold similarity score for near-optimal alignments
+    
+    :rtpye: list(list(tuple(str, str)))
+    :return: Alignment(s) of str1 and str2 
      
     (Kondrak 2002: 51)
     """
+    assert 0.0 <= epsilon <= 1.0, "Epsilon must be between 0.0 and 1.0."
     m = len(str1)
     n = len(str2)
     # This includes Kondrak's initialization of row 0 and column 0 to all 0s.
@@ -422,8 +411,8 @@ def _retrieve(i, j, s, S, T, str1, str2, out):
     """
     Retrieve the path through the similarity matrix S starting at (i, j).
     
-    :return: character by character alignments
     :rtype: list(tuple(str, str))
+    :return: Alignment of str1 and str2
     """
     if S[i, j] == 0:
         return out
@@ -434,15 +423,15 @@ def _retrieve(i, j, s, S, T, str1, str2, out):
         elif i > 1 and S[i-2, j-1] + sigma_exp(str2[j-1], str1[i-2:i]) + s >= T:
             out.insert(0, (str1[i-2:i], str2[j-1]))
             _retrieve(i-2, j-1, s+sigma_exp(str2[j-1], str1[i-2:i]), S, T, str1, str2, out)
-        elif S[i-1, j-1] + sigma_sub(str1[i-1], str2[j-1]) + s >= T:
-            out.insert(0, (str1[i-1], str2[j-1]))
-            _retrieve(i-1, j-1, s+sigma_sub(str1[i-1], str2[j-1]), S, T, str1, str2, out)
         elif S[i, j-1] + sigma_skip(str2[j-1]) + s >= T:
             out.insert(0, ('-', str2[j-1]))
             _retrieve(i, j-1, s+sigma_skip(str2[j-1]), S, T, str1, str2, out)
         elif S[i-1, j] + sigma_skip(str1[i-1]) + s >= T:
             out.insert(0, (str1[i-1], '-'))
             _retrieve(i-1, j, s+sigma_skip(str1[i-1]), S, T, str1, str2, out)
+        elif S[i-1, j-1] + sigma_sub(str1[i-1], str2[j-1]) + s >= T:
+            out.insert(0, (str1[i-1], str2[j-1]))
+            _retrieve(i-1, j-1, s+sigma_sub(str1[i-1], str2[j-1]), S, T, str1, str2, out)
     return out
        
 def sigma_skip(p):
@@ -513,8 +502,91 @@ def V(p):
     return C_vwl
     
 # === Test ===
-if test:
-    data = load_data('data/aline_test.csv')
+
+def demo():
+    """
+    A demonstration of the result of aligning phonetic sequences
+    used in Kondrak's (2002) dissertation.
+    """
+    data = [pair.split(',') for pair in cognate_data.split('\n')]
     for pair in data:
-        print(align(pair[0], pair[1])[0])
-        print()    
+        print(pair[0], "~", pair[1], ":", align(pair[0], pair[1])[0])
+
+cognate_data = """jo,ʒə
+tu,ty
+nosotros,nu
+kjen,ki
+ke,kwa
+todos,tu
+una,ən
+dos,dø
+tres,trwa
+ombre,om
+arbol,arbrə
+pluma,plym
+kabeθa,kap
+boka,buʃ
+pje,pje
+koraθon,kœr
+ber,vwar
+benir,vənir
+deθir,dir
+pobre,povrə
+ðis,dIzes
+ðæt,das
+wat,vas
+nat,nixt
+loŋ,laŋ
+mæn,man
+fleʃ,flajʃ
+bləd,blyt
+feðər,fEdər
+hær,hAr
+ir,Or
+aj,awgə
+nowz,nAzə
+mawθ,munt
+təŋ,tsuŋə
+fut,fys
+nij,knI
+hænd,hant
+hart,herts
+livər,lEbər
+ænd,ante
+æt,ad
+blow,flAre
+ir,awris
+ijt,edere
+fiʃ,piʃkis
+flow,fluere
+staɾ,stella
+ful,plenus
+græs,gramen
+hart,kordis
+horn,korny
+aj,ego
+nij,genU
+məðər,mAter
+mawntən,mons
+nejm,nomen
+njuw,nowus
+wən,unus
+rawnd,rotundus
+sow,suere
+sit,sedere
+θrij,tres
+tuwθ,dentis
+θin,tenwis
+kinwawa,kenuaʔ
+nina,nenah
+napewa,napɛw
+wapimini,wapemen
+namesa,namɛʔs
+okimawa,okemaw
+ʃiʃipa,seʔsep
+ahkohkwa,ahkɛh
+pematesiweni,pematesewen
+asenja,aʔsɛn"""
+
+if __name__ == '__main__':
+    demo()
